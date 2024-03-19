@@ -14,7 +14,10 @@ const Table = () => {
   const [datapeg, setDatapeg] = useState(null);
   const fecher = (url) => fetch(url).then((res) => res.json());
 
-  const { data, error } = useSWR(process.env.API_PEG, fecher);
+  const { data, error } = useSWR(
+    "https://script.google.com/macros/s/AKfycbzgsxA_2Qa2p68VQbYF4PzicDu_1aYka3tX8fNdpQb9R-P3LHIkUc5W5c_s5-SeLARN/exec",
+    fecher
+  );
 
   useEffect(() => {
     if (data) {
