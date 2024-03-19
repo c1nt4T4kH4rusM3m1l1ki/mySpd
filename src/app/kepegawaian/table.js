@@ -1,6 +1,7 @@
 "use client";
 import { Thasadith } from "next/font/google";
 import { useEffect, useState } from "react";
+import useSWR from "swr";
 
 const tasadit = Thasadith({
   subsets: ["latin"],
@@ -10,6 +11,23 @@ const tasadit = Thasadith({
 
 const Table = () => {
   const a = "overflow-x-auto px-20 mt-5 h-[400px] ";
+  const [datapeg, setDatapeg] = useState(null);
+  const fecher = (url) => fetch(url).then((res) => res.json());
+
+  const { data, error } = useSWR(process.env.API_PEG, fecher);
+
+  useEffect(() => {
+    if (data) {
+      setDatapeg(data);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (data) {
+      setDatapeg(data);
+    }
+  }, [data]);
+
   return (
     <div className={a + tasadit.className}>
       <table className="table table-sm">
@@ -26,28 +44,19 @@ const Table = () => {
             <th className="w-[10px]"></th>
           </tr>
         </thead>
-        <Body />
+        <Body data={datapeg} />
       </table>
     </div>
   );
 };
 
-const Body = () => {
-  const [datapeg, setDatapeg] = useState([]);
-
-  useEffect(() => {
-    const dataFetch = async () => {
-      const res = await fetch(process.env.API_PEG);
-      let dt = await res.json();
-      setDatapeg(dt.data);
-    };
-    dataFetch();
-  }, []);
+const Body = (props) => {
+  const { data } = props;
 
   return (
     <tbody>
-      {datapeg.map((item) => {
-        return (
+      {data ? (
+        data.map((item) => (
           <tr key={item.id}>
             <td className=" w-20">{item.id}</td>
             <td>{item.nama}</td>
@@ -61,8 +70,16 @@ const Body = () => {
               <DropDown />
             </td>
           </tr>
-        );
-      })}
+        ))
+      ) : (
+        <tr>
+          <td colSpan={9} className="text-center">
+            <span className="loading loading-spinner text-secondary"></span>
+            <span className="loading loading-spinner text-secondary"></span>
+            <span className="loading loading-spinner text-secondary"></span>
+          </td>
+        </tr>
+      )}
     </tbody>
   );
 };
