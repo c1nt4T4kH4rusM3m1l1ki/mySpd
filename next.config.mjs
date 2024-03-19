@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     env:{
-        API_PEG:"http://localhost:3000/api/getpeg"
+        API_PEG:"https://my-spd.vercel.app/api/getpeg"
     }
 };
 
