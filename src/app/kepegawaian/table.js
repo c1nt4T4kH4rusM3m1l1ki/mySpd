@@ -37,7 +37,7 @@ const Body = () => {
 
   useEffect(() => {
     const dataFetch = async () => {
-      const res = await fetch("http://localhost:3000/api/getpeg");
+      const res = await fetch(process.env.API_PEG);
       let dt = await res.json();
       setDatapeg(dt.data);
     };
