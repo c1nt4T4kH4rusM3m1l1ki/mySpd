@@ -2,6 +2,7 @@
 import { Thasadith } from "next/font/google";
 import { useEffect, useState } from "react";
 import useSWR from "swr";
+import { tgllIndo } from "@/lib/fungsiLain";
 
 const tasadit = Thasadith({
   subsets: ["latin"],
@@ -10,7 +11,7 @@ const tasadit = Thasadith({
 });
 
 const Table = () => {
-  const a = "overflow-x-auto px-20 mt-5 h-[400px] ";
+  const a = "overflow-x-auto px-20 my-5 h-[410px] ";
   const [datapeg, setDatapeg] = useState(null);
   const fecher = (url) => fetch(url).then((res) => res.json());
 
@@ -19,15 +20,25 @@ const Table = () => {
     fecher
   );
 
+  const callDataPeg = (item)=>{
+    let newdata =[]
+      for(let i=item.length+1; i > 0;i--){
+        if(item[i]!==undefined){
+          newdata.push(item[i])
+        }
+      }
+      setDatapeg(newdata);
+  }
+
   useEffect(() => {
     if (data) {
-      setDatapeg(data);
+      callDataPeg(data)
     }
   }, []);
 
   useEffect(() => {
     if (data) {
-      setDatapeg(data);
+      callDataPeg(data)
     }
   }, [data]);
 
@@ -36,7 +47,7 @@ const Table = () => {
       <table className="table table-sm">
         <thead className="bg-gray-50 border text-base font-bold sticky top-0 z-20">
           <tr>
-            <th className=" w-20">Id</th>
+            <th className="hidden w-20">Id</th>
             <th>Nama</th>
             <th>Nip</th>
             <th>Pangkat</th>
@@ -61,14 +72,14 @@ const Body = (props) => {
       {data ? (
         data.map((item) => (
           <tr key={item.id}>
-            <td className=" w-20">{item.id}</td>
+            <td className="hidden w-20">{item.id}</td>
             <td>{item.nama}</td>
             <td>{item.nip}</td>
-            <td>Penata Tingkat I</td>
-            <td className=" w-20">III.d</td>
-            <td>Perencana Ahli Muda</td>
-            <td>30 Desember 1986</td>
-            <td>C</td>
+            <td>{item.pangkat}</td>
+            <td className=" w-20">{item.golongan}</td>
+            <td>{item.jabatan}</td>
+            <td className="text-end">{tgllIndo(item.tanggalLahir)}</td>
+            <td className="text-center">{item.tingkatSpd}</td>
             <td className="text-xl">
               <DropDown />
             </td>

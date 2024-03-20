@@ -10,7 +10,7 @@ const Navbar = () => {
   return (
     <div className="navbar bg-base-100">
       <StartNavbar />
-      <div className="navbar-center hidden lg:flex">
+      <div className="navbar-center lg:flex">
         <ul className="menu menu-horizontal font-bold text-lg px-1">
           <li>
             <Link

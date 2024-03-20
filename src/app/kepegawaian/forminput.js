@@ -1,9 +1,9 @@
 import { Yuji_Syuku } from "next/font/google";
 
 const yuji = Yuji_Syuku({
-  subsets:['latin'],
-  weight:"400"
-})
+  subsets: ["latin"],
+  weight: "400",
+});
 
 const TambahPegawai = () => {
   return (
@@ -23,8 +23,10 @@ const TambahPegawai = () => {
           aria-label="close sidebar"
           className="drawer-overlay"
         ></label>
-        <div className="menu p-4 w-[350px] min-h-full bg-base-100 text-base-content">
-          <h1 className={`text-center font-bold mt-6 text-xl ${yuji.className}`}>
+        <div className="menu p-4 w-[500px] min-h-full bg-base-100 text-base-content">
+          <h1
+            className={`text-center font-bold mt-6 text-xl ${yuji.className}`}
+          >
             TAMBAH PEGAWAI
           </h1>
           {/* tempatkan isian */}
@@ -40,42 +42,42 @@ const TambahPegawai = () => {
 const FormInput = () => {
   return (
     <form className={`mt-3 ${yuji.className} `}>
-      <label className="input input-bordered flex items-center gap-2 font-bold text-xs w-[300px]">
+      <label className="input input-bordered flex items-center gap-2 font-bold text-md w-[450px]">
         NAMA :
         <input type="text" className="grow" />
       </label>
-      <label className="input input-bordered flex items-center mt-5 gap-2 text-xs w-[300px] font-bold">
+      <label className="input input-bordered flex items-center mt-5 gap-2 text-md w-[450px] font-bold">
         NIP :
         <input type="text" className="grow" />
       </label>
-      <label className="input input-bordered flex items-center mt-5 gap-2 text-xs w-[300px] font-bold">
+      <label className="input input-bordered flex items-center mt-5 gap-2 text-md w-[450px] font-bold">
         PANGKAT :
         <input type="text" className="grow" />
       </label>
-      <label className="input input-bordered flex items-center mt-5 gap-2 text-xs w-[300px] font-bold">
+      <label className="input input-bordered flex items-center mt-5 gap-2 text-md w-[450px] font-bold">
         GOL :
         <input type="text" className="grow" />
       </label>
-      <label className="input input-bordered flex items-center mt-5 gap-2 text-xs w-[300px] font-bold">
+      <label className="input input-bordered flex items-center mt-5 gap-2 text-md w-[450px] font-bold">
         JABATAN :
         <input type="text" className="grow" />
       </label>
-      <label className="input input-bordered flex items-center mt-5 gap-2 text-xs w-[300px] font-bold">
+      <label className="input input-bordered flex items-center mt-5 gap-2 text-md w-[450px] font-bold">
         TGL LAHIR :
         <input type="date" className="grow" />
       </label>
-      <label className="input input-bordered flex items-center mt-5 gap-2 text-xs w-[300px] font-bold">
-        TKT SPD:
+      <label className="input input-bordered flex items-center mt-5 gap-2 text-md w-[450px] font-bold">
+        TINGKAT SPD:
         <input type="text" className="grow" />
       </label>
       <div className="flex justify-end">
-        <button
-          type="button"
+        <label
+          htmlFor="my-drawer"
+          aria-label="close sidebar"
           className="btn btn-neutral btn-sm mt-3 text-white"
         >
-          {" "}
-          TAMBAH{" "}
-        </button>
+          TAMBAH
+        </label>
       </div>
     </form>
   );
