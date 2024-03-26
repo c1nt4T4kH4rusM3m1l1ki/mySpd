@@ -4,7 +4,7 @@ export default function Home() {
 
   return (
     <main>
-      <div className="mx-5 my-12 p-5">
+      <div className="mx-5 my-14 p-5">
         <div className="grid grid-cols-2 mt-4">
           <div className="text-xl text-end p-4">
             <div className="chat chat-end p-5">
