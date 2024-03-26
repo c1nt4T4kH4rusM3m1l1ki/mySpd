@@ -19,7 +19,7 @@ const Navbar = () => {
                 param == "/" ? "text-pink-600 text-2xl rotate-[-6deg]" : ""
               }`}
             >
-              <Iconhome /> SPD
+              <Iconhome /> Home
             </Link>
           </li>
           <li>

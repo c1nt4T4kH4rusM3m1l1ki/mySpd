@@ -3,6 +3,7 @@ import { Yuji_Syuku } from "next/font/google";
 const yuji = Yuji_Syuku({
   subsets: ["latin"],
   weight: "400",
+  display:'optional'
 });
 
 const TambahPegawai = () => {
@@ -70,11 +71,18 @@ const FormInput = () => {
         TINGKAT SPD:
         <input type="text" className="grow" />
       </label>
-      <div className="flex justify-end">
+      <div className="flex justify-end mt-6">
         <label
           htmlFor="my-drawer"
           aria-label="close sidebar"
-          className="btn btn-neutral btn-sm mt-3 text-white"
+          className="btn btn-error btn-sm mr-2 text-white"
+        >
+          EXIT
+        </label>
+        <label
+          // htmlFor="my-drawer"
+          aria-label="close sidebar"
+          className="btn btn-neutral btn-sm  text-white"
         >
           TAMBAH
         </label>

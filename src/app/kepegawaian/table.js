@@ -15,8 +15,7 @@ const Table = () => {
   const [datapeg, setDatapeg] = useState(null);
   const fecher = (url) => fetch(url).then((res) => res.json());
 
-  const { data, error } = useSWR(
-    "https://script.google.com/macros/s/AKfycbzgsxA_2Qa2p68VQbYF4PzicDu_1aYka3tX8fNdpQb9R-P3LHIkUc5W5c_s5-SeLARN/exec",
+  const { data, error } = useSWR(process.env.URL_PEG,
     fecher
   );
 
@@ -73,15 +72,15 @@ const Body = (props) => {
         data.map((item) => (
           <tr key={item.id}>
             <td className="hidden w-20">{item.id}</td>
-            <td>{item.nama}</td>
+            <td className="cursor-pointer hover:text-red-600 focus:text-sky-300">{item.nama}</td>
             <td>{item.nip}</td>
             <td>{item.pangkat}</td>
             <td className=" w-20">{item.golongan}</td>
             <td>{item.jabatan}</td>
             <td className="text-end">{tgllIndo(item.tanggalLahir)}</td>
             <td className="text-center">{item.tingkatSpd}</td>
-            <td className="text-xl">
-              <DropDown />
+            <td className="text-xl btn glass btn-circle">
+              <span className="material-symbols-outlined text-red-900">delete</span>
             </td>
           </tr>
         ))
@@ -98,30 +97,6 @@ const Body = (props) => {
   );
 };
 
-const DropDown = () => {
-  return (
-    <div className="dropdown dropdown-left">
-      <div
-        tabIndex={0}
-        role="button"
-        className="hover:scale-125 hover:text-red-700 m-1 text-emerald-500"
-      >
-        <span className="material-symbols-outlined">edit</span>
-      </div>
-      <ul
-        tabIndex={0}
-        className="dropdown-content z-30 menu p-2 shadow bg-lime-50  rounded-box w-30"
-      >
-        <li>
-          <span className="material-symbols-outlined text-emerald-500">
-            quick_reference_all
-          </span>
 
-          <span className="material-symbols-outlined text-red-900">delete</span>
-        </li>
-      </ul>
-    </div>
-  );
-};
 
 export default Table;
