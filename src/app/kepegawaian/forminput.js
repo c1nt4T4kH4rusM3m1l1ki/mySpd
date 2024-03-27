@@ -1,14 +1,7 @@
-import { Yuji_Syuku } from "next/font/google";
-
-const yuji = Yuji_Syuku({
-  subsets: ["latin"],
-  weight: "400",
-  display:'optional'
-});
 
 const TambahPegawai = () => {
   return (
-    <div className="drawer mt-6">
+    <div className="drawer mt-5">
       <input id="my-drawer" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content">
         <label
@@ -24,9 +17,9 @@ const TambahPegawai = () => {
           aria-label="close sidebar"
           className="drawer-overlay"
         ></label>
-        <div className="menu p-4 w-[500px] min-h-full bg-base-100 text-base-content">
+        <div className="menu p-4 w-[500px] min-h-full text-base-content bg-salmon">
           <h1
-            className={`text-center font-bold mt-6 text-xl ${yuji.className}`}
+            className={`text-center font-bold mt-6 text-xl`}
           >
             TAMBAH PEGAWAI
           </h1>
@@ -42,7 +35,7 @@ const TambahPegawai = () => {
 
 const FormInput = () => {
   return (
-    <form className={`mt-3 ${yuji.className} `}>
+    <form className={`mt-3`}>
       <label className="input input-bordered flex items-center gap-2 font-bold text-md w-[450px]">
         NAMA :
         <input type="text" className="grow" />
@@ -75,7 +68,7 @@ const FormInput = () => {
         <label
           htmlFor="my-drawer"
           aria-label="close sidebar"
-          className="btn btn-error btn-sm mr-2 text-white"
+          className="btn btn-warning btn-sm mr-2 text-black"
         >
           EXIT
         </label>

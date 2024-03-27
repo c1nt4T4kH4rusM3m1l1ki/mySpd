@@ -34,7 +34,7 @@ const Footer = () => {
     <div className="flex flex-col min-h-min">
       <main className="flex-1"></main>
       <footer className="bg-base-200 text-end text-md p-4">
-        Copyright @ 2024 By. Rindra Aniko
+        Copyright @ 2024 By. Rindra Aniko (Version : 05.00.01)
       </footer>
     </div>
   );
