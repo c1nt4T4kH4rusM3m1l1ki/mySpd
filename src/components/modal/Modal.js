@@ -1,5 +1,5 @@
 export function ModalEdit(props) {
-    const {modalId, nama ,children} = props
+    const {modalId, nama ,children, lebar='w-8/12'} = props
   return (
     <>
       {/* The button to open modal */}
@@ -10,10 +10,30 @@ export function ModalEdit(props) {
       {/* Put this part before </body> tag */}
       <input type="checkbox" id={modalId} className="modal-toggle" />
       <div className="modal" role="dialog">
-        <div className="modal-box w-8/12 max-w-5xl ">
+        <div className={`modal-box ${lebar} max-w-5xl`}>
           {children}
         </div>
       </div>
     </>
   );
+}
+
+export function ModalCreate(props) {
+  const {modalId, nama ,children, lebar='w-8/12'} = props
+return (
+  <>
+    {/* The button to open modal */}
+    <label htmlFor={modalId} className="btn btn-sm btn-outline">
+      {nama}
+    </label>
+
+    {/* Put this part before </body> tag */}
+    <input type="checkbox" id={modalId} className="modal-toggle" />
+    <div className="modal" role="dialog">
+      <div className={`modal-box ${lebar} max-w-screen-xl`}>
+        {children}
+      </div>
+    </div>
+  </>
+);
 }

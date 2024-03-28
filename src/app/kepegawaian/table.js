@@ -28,12 +28,14 @@ const Table = () => {
     if (data) {
       callDataPeg(data);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     if (data) {
       callDataPeg(data);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 
   return (
