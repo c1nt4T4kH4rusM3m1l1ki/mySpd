@@ -2,7 +2,10 @@ import Image from "next/image";
 
 const Renewdata = () => {
   return (
-    <dialog open className="mt-16 bg-emerald-400 shadow-emerald-500/50 z-30 w-[400px] h-[400px] rounded-full p-10">
+    <dialog
+      open
+      className="mt-14 bg-emerald-400 shadow-emerald-500/50 z-30 w-[400px] h-[400px] rounded-full p-10"
+    >
       <div className="flex justify-center">
         <Gambar />
       </div>
@@ -23,12 +26,15 @@ export default Renewdata;
 
 function Gambar() {
   return (
-    <Image
-      src="https://i.gifer.com/NvL.gif"
-      width={500}
-      height={400}
-      alt="Picture of the author"
-      className="rounded-3xl w-[400px] h-[250px]"
-    />
+    <>
+      <iframe
+        src="https://gifer.com/embed/J4o"
+        width="500"
+        height="230"
+        frameBorder="0"
+        allowFullScreen
+        className="rounded-3xl mt-3"
+      ></iframe>
+    </>
   );
 }
