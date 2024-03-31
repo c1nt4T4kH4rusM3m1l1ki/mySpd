@@ -19,7 +19,7 @@ export default function RootLayout({ children }) {
       <head>
         <link
           rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
         />
         <link rel="icon" href="/logo_baru.ico" sizes="any" />
       </head>
@@ -34,11 +34,12 @@ export default function RootLayout({ children }) {
 
 const Footer = () => {
   return (
-    <div className="flex flex-col min-h-min">
-      <main className="flex-1"></main>
-      <footer className="bg-base-200 text-end text-md p-4">
-        Copyright @ 2024 By. Rindra Aniko --- (Version : 05.00.01)
-      </footer>
-    </div>
+    <footer>
+      <div className="relative">
+        <div className="fixed bottom-0 right-5 h-10 text-base text-cyan-800">
+          <span>Copyright @ 2024 By. Rindra Aniko (Version : 05.00.01)</span>
+        </div>
+      </div>
+    </footer>
   );
 };

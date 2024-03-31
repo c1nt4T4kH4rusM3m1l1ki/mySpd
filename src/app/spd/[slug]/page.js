@@ -7,7 +7,7 @@ import Link from "next/link";
 export default function DetailSpd({ params }) {
   return (
     <div>
-        <div className="flex justify-end mr-20 mt-8">
+        <div className="flex justify-end mr-20 mt-6">
             <Link href={"/spd"} type="button" className="btn btn-warning btn-sm">Kembali</Link>
             <button type="button" className="btn btn-accent btn-sm mx-2">Simpan</button>
             <button type="button" className="btn btn-error btn-sm">Hapus SPT Ini</button>

@@ -9,7 +9,7 @@ export default function InputSpt() {
     <ModalCreate
       nama={
         <>
-          <span class="material-symbols-outlined text-emerald-700">
+          <span className="material-symbols-outlined text-emerald-700">
             add_box
           </span>
           <span>BUAT SPT</span>

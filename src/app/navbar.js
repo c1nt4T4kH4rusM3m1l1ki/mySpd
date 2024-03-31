@@ -18,7 +18,7 @@ const Navbar = () => {
               className={`hover:scale-110 hover:text-pink-600 hover:rotate-[-6deg] ${
                 param == "/" ? "text-pink-600 text-2xl rotate-[-6deg]" : ""
               }`}
-            ><span class="material-symbols-outlined text-salmon">location_home</span>
+            ><span className="material-symbols-outlined text-salmon">location_home</span>
               Home
             </Link>
           </li>
@@ -29,7 +29,7 @@ const Navbar = () => {
                 param == "/spd" ? "text-pink-600 text-2xl rotate-[-6deg]" : ""
               }`}
             >
-              <span class="material-symbols-outlined text-emerald-500">design_services</span>
+              <span className="material-symbols-outlined text-emerald-500">design_services</span>
               Buat Spt
             </Link>
           </li>
@@ -41,7 +41,7 @@ const Navbar = () => {
                   ? "text-pink-600 text-2xl rotate-[-6deg]"
                   : ""
               }`}
-            ><span class="material-symbols-outlined text-cyan-600">badge</span>
+            ><span className="material-symbols-outlined text-cyan-600">badge</span>
               Kepegawaian
             </Link>
           </li>
@@ -66,7 +66,7 @@ const LogOut = () => {
   return (
     <div className="navbar-end font-bold ">
       <a className="btn btn-circle btn-outline">
-        <span class="material-symbols-outlined hover:scale-150 hover:text-cyan-600 hover:rotate-[6deg]">
+        <span className="material-symbols-outlined hover:scale-150 hover:text-cyan-600 hover:rotate-[6deg]">
           lock_open
         </span>
       </a>

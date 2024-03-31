@@ -21,7 +21,7 @@ const TabelSpd = (props) => {
             <th rowSpan={2} className="border border-black">
               Print
             </th>
-            <th colspan={3}>Download</th>
+            <th colSpan={3}>Download</th>
             <th className="border border-black" rowSpan={2}>
               Action
             </th>
@@ -66,7 +66,7 @@ function BodyTable(props) {
             <td className="border border-black text-center">xxx</td>
             <td className="border border-black text-center">
               <Link href={`/spd/${item.id}`} className="btn btn-circle btn-xs">
-                <span class="material-symbols-outlined text-cyan-600 hover:text-red-500">
+                <span className="material-symbols-outlined text-cyan-600 hover:text-red-500">
                   build_circle
                 </span>
               </Link>

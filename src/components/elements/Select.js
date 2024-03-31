@@ -8,10 +8,7 @@ const Select = forwardRef(function Select(props, ref){
         <span>{name}</span>
       </div>
       <select className={`select select-bordered w-60 ${mt}`} disabled={active} onChange={onChange} ref={ref}>
-        <option disabled selected>
-          Pilih
-        </option>
-        <option>Star Wars</option>
+        <option>pilih</option>
       </select>
     </label>
   );

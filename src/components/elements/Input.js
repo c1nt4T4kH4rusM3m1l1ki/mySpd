@@ -1,7 +1,7 @@
 import { forwardRef } from "react";
 
 const Input = forwardRef( function Input(props, ref){
-    const {name, active=false, onChange} = props
+    const {name, active=false, onChange, type="text"} = props
     return (
         <label className="form-control">
           <div className="label">
@@ -11,7 +11,7 @@ const Input = forwardRef( function Input(props, ref){
             ref={ref}
             disabled={active}
             onChange={onChange}
-            type="text"
+            type={type}
             className="input input-bordered w-[15rem]"
           />
         </label>
