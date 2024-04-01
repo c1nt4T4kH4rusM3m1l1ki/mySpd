@@ -1,11 +1,13 @@
 import { ModalEdit } from "@/components/modal/Modal";
 import moment from "moment";
 import { useRef, useState, useEffect } from "react";
-import { PangkatGol } from "@/lib/data";
+import { PangkatGol, objPegawai } from "@/lib/data";
+import { TambahPeg, ubahGolongan } from "@/lib/fungsiLain";
 
 const EditKepegawaian = (props) => {
-  const { nama, id, data } = props;
+  const { nama, id, data, setProses } = props;
   const [edit, setEdit] = useState(true);
+  const [dataPeg, setDataPeg] = useState(objPegawai);
 
   const refs = {
     nama: useRef(),
@@ -22,10 +24,10 @@ const EditKepegawaian = (props) => {
     refs.nip.current.value = data.nip;
     refs.jabatan.current.value = data.jabatan;
     refs.pangkat.current.value = data.pangkat;
-    refs.golongan.current.value = data.golongan;
     refs.tanggalLahir.current.value = moment(data.tanggalLahir).format(
       "YYYY-MM-DD"
     );
+    setDataPeg({...dataPeg, golongan:data.golongan})
     refs.tingkatSpd.current.value = data.tingkatSpd;
   }, []);
 
@@ -34,20 +36,37 @@ const EditKepegawaian = (props) => {
     refs.nip.current.value = data.nip;
     refs.jabatan.current.value = data.jabatan;
     refs.pangkat.current.value = data.pangkat;
-    refs.golongan.current.value = data.golongan;
     refs.tanggalLahir.current.value = moment(data.tanggalLahir).format(
       "YYYY-MM-DD"
     );
+    setDataPeg({...dataPeg, golongan:data.golongan})
     refs.tingkatSpd.current.value = data.tingkatSpd;
   }, [edit]);
 
   function editHendler() {
     setEdit(false);
     setTimeout(() => refs.nama.current.focus(), 0);
+    setDataPeg({
+      action:"edit",
+      id: id,
+      nama: refs.nama.current.value,
+      nip: refs.nip.current.value,
+      jabatan: refs.jabatan.current.value,
+      pangkat: refs.pangkat.current.value,
+      golongan:refs.golongan.current.value,
+      tanggalLahir: refs.tanggalLahir.current.value,
+      tingkatSpd: refs.tingkatSpd.current.value,
+    });
   }
 
   const simpanHendler = () => {
+    TambahPeg(dataPeg);
     setEdit(true);
+    setProses(true)
+    setTimeout(()=>{
+      setProses(false)
+      alert("Data Berhasil Di Perbaharui")
+    },3000)
   };
 
   return (
@@ -65,6 +84,9 @@ const EditKepegawaian = (props) => {
               type="text"
               className="grow"
               disabled={edit}
+              onChange={(e) => {
+                setDataPeg({ ...dataPeg, nama: e.target.value });
+              }}
             />
           </label>
           <label className="input flex items-center gap-2">
@@ -74,6 +96,9 @@ const EditKepegawaian = (props) => {
               type="text"
               className="grow"
               disabled={edit}
+              onChange={(e) => {
+                setDataPeg({ ...dataPeg, nip: e.target.value });
+              }}
             />
           </label>
         </div>
@@ -84,6 +109,7 @@ const EditKepegawaian = (props) => {
             <select
               ref={refs.pangkat}
               className="grow"
+              onChange={(e) => ubahGolongan(e, setDataPeg, dataPeg)}
             >
               {PangkatGol.map((pangkat, i) => {
                 return <option key={i}>{pangkat.nama}</option>;
@@ -97,6 +123,7 @@ const EditKepegawaian = (props) => {
               type="text"
               className="grow"
               disabled={edit}
+              value={dataPeg.golongan}
             />
           </label>
         </div>
@@ -109,6 +136,9 @@ const EditKepegawaian = (props) => {
               type="text"
               className="grow"
               disabled={edit}
+              onChange={(e) => {
+                setDataPeg({ ...dataPeg, jabatan: e.target.value });
+              }}
             />
           </label>
           <label className="input flex items-center gap-2 mt-3">
@@ -118,6 +148,9 @@ const EditKepegawaian = (props) => {
               type="date"
               className="grow"
               disabled={edit}
+              onChange={(e) => {
+                setDataPeg({ ...dataPeg, tanggalLahir: e.target.value });
+              }}
             />
           </label>
         </div>
@@ -130,6 +163,9 @@ const EditKepegawaian = (props) => {
               type="text"
               className="grow"
               disabled={edit}
+              onChange={(e) => {
+                setDataPeg({ ...dataPeg, tingkatSpd: e.target.value });
+              }}
             />
           </label>
         </div>

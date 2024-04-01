@@ -71,32 +71,34 @@ const Body = (props) => {
           <tr key={item.id}>
             <td className="hidden w-20">{item.id}</td>
             <td>
-              <EditKepegawaian nama={item.nama} id={item.id} data={item} />
+              <EditKepegawaian nama={item.nama} id={item.id} data={item} setProses={setProses}/>
             </td>
             <td>
-              <EditKepegawaian nama={item.nip} id={item.id} data={item} />
+              <EditKepegawaian nama={item.nip} id={item.id} data={item} setProses={setProses}/>
             </td>
             <td>
-              <EditKepegawaian nama={item.pangkat} id={item.id} data={item} />
+              <EditKepegawaian nama={item.pangkat} id={item.id} data={item} setProses={setProses}/>
             </td>
             <td className=" w-20">
-              <EditKepegawaian nama={item.golongan} id={item.id} data={item} />
+              <EditKepegawaian nama={item.golongan} id={item.id} data={item} setProses={setProses}/>
             </td>
             <td>
-              <EditKepegawaian nama={item.jabatan} id={item.id} data={item} />
+              <EditKepegawaian nama={item.jabatan} id={item.id} data={item} setProses={setProses}/>
             </td>
             <td className="text-end">
               <EditKepegawaian
                 nama={tgllIndo(item.tanggalLahir)}
                 id={item.id}
                 data={item}
+                setProses={setProses}
               />
             </td>
             <td className="text-center">
               <EditKepegawaian
                 nama={item.tingkatSpd}
                 id={item.id}
-                data={item}
+                data={item}setProses={setProses}
+
               />
             </td>
             <td>

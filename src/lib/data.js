@@ -10,7 +10,6 @@ export const PangkatGol = [
   { nama: "Pembina Utama" },
 ];
 
-
 export const objPegawai = {
     id: "",
     nama: "",
