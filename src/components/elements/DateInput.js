@@ -2,6 +2,7 @@ import { forwardRef } from "react";
 
 const DateInput = forwardRef(function DateInput(props, ref){
     const {name, active=false, onChange} = props
+    const disableColor= {color:'#000000'}
     return (
         <label className="form-control">
           <div className="label">
@@ -14,6 +15,7 @@ const DateInput = forwardRef(function DateInput(props, ref){
             type="date"
             placeholder="Type here"
             className="input input-bordered w-[15rem]"
+            style={disableColor}
           />
         </label>
     )

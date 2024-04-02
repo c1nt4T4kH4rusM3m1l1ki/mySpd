@@ -4,14 +4,15 @@ import TambahPegawai from "./forminput";
 import Renewdata from "./renewdata";
 import Table from "./table";
 
+
 const Kepegawaian = () => {
   const [proses, setProses] = useState(false);
+
   return (
     <>
       {proses&&<Renewdata />}
-      
       <TambahPegawai setProses={setProses} />
-      <Table setProses={setProses} />
+      <Table setProses={setProses} proses={proses}/>
     </>
   );
 };

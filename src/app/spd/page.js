@@ -6,13 +6,13 @@ import InputSpt from "./InputSpt";
 
 export default function PageSpd() {
   const [dataSPD, setDataSPD] = useState(null);
-  const fetcer = (url) => fetch(url).then((res) => res.json());
+  const fetcher = (url) => fetch(url).then((res) => res.json());
 
-  const { data, error } = useSWR(process.env.URL_SPD, fetcer);
+  const { data, error } = useSWR(process.env.URL_SPD, fetcher);
 
   const callData = (item) => {
     let newdata = [];
-    for (let i = item.length + 1; i > 0; i--) {
+    for (let i = item.length-1; i > -1; i--) {
       if (item[i] !== undefined) {
         newdata.push(item[i]);
       }
@@ -23,7 +23,9 @@ export default function PageSpd() {
   useEffect(() => {
     if (data) {
       callData(data);
+      
     }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

@@ -1,41 +1,40 @@
-import DateInput from "@/components/elements/DateInput";
-import Input from "@/components/elements/Input";
-import Select from "@/components/elements/Select";
-import TextareaLg from "@/components/elements/Textarea";
-import Link from "next/link";
+"use client";
+
+import { useEffect, useState } from "react";
+import Loading from "../loading";
+import { FormEdit } from "./form";
+import useSWR from "swr";
 
 export default function DetailSpd({ params }) {
+  const fether = (url) => fetch(url).then((res) => res.json());
+  const [pegawai, setPegawai]=useState(null)
+  const { data, error } = useSWR(
+    process.env.URL_SPD + "?id=" + params.slug,
+    fether
+  );
+
+  useEffect(()=>{
+    async function getPeg(){
+      const res = await fetch(process.env.URL_PEG)
+      const dt = await res.json()
+      setPegawai(dt)
+    }
+    getPeg()
+  },[])
+
+
   return (
-    <div>
-        <div className="flex justify-end mr-20 mt-6">
-            <Link href={"/spd"} type="button" className="btn btn-warning btn-sm">Kembali</Link>
-            <button type="button" className="btn btn-accent btn-sm mx-2">Simpan</button>
-            <button type="button" className="btn btn-error btn-sm">Hapus SPT Ini</button>
+    <>
+      {data && pegawai ? (
+        <FormEdit dataSpd={data} pegawai={pegawai}/>
+      ) : (
+        <div className="flex justify-center my-[200px]">
+          <span className="loading loading-spinner text-secondary"></span>
+          <span className="loading loading-spinner text-secondary"></span>
+          <span className="loading loading-spinner text-secondary"></span>
+          <span className="loading loading-spinner text-secondary"></span>
         </div>
-      <div className="flex justify-between px-10 mx-10 mt-3">
-        <TextareaLg name="Dasar SPT" />
-        <TextareaLg name="Maksud" />
-      </div>
-
-      <div className="flex justify-between mx-10 mt-1 px-10">
-        <DateInput name="Tanggal Berangkat"/>
-        <DateInput name="Tanggal Kembali"/>
-        <Input name="Jenis Kendaraan"/>
-        <Input name="Tujuan Berangkat"/>
-      </div>
-
-      <div className="flex justify-between mx-10 mt-1 px-10">
-        <Select name="Yang Melaksanakan"/>
-        <Select name="Pengikut:"/>
-        <Select mt="mt-6"/>
-        <Select mt="mt-6"/>
-      </div>
-
-      <div className="flex justify-between mx-10 mt-1 mb-10 px-10">
-            <Select name="PPTK"/>
-            <DateInput name="Tanggal SPT"/>
-            <DateInput name="Tanggal SPD"/>
-      </div>
-    </div>
+      )}
+    </>
   );
 }

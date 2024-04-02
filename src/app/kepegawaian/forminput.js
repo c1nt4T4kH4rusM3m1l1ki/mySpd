@@ -44,10 +44,6 @@ const FormInput = (props) => {
 function Tambah() {
     setProses(true)
     TambahPeg(dataPeg)
-    setTimeout(()=>{
-      setProses(false)
-      alert("Data Berhasil Di Perbaharui")
-    },3000)
   }
 
   return (

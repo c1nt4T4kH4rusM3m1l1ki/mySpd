@@ -4,13 +4,11 @@ const Renewdata = () => {
   return (
     <dialog
       open
-      className="mt-14 bg-emerald-400 shadow-emerald-500/50 z-30 w-[400px] h-[400px] rounded-full p-10"
+      className="mt-40 bg-base-400 shadow-slate-500/50 z-30 w-[300px] h-[80px] rounded-2xl "
     >
-      <div className="flex justify-center">
-        <Gambar />
-      </div>
+      
       <p className="text-center mt-4 text-red-800 font-bold">
-        <span>UPDATE DATA</span>
+        <span>PROSES UPDATE DATA</span>
       </p>
       <div className="text-center text-red-800">
         <span className="loading loading-bars loading-sm"></span>
@@ -23,18 +21,3 @@ const Renewdata = () => {
 };
 
 export default Renewdata;
-
-function Gambar() {
-  return (
-    <>
-      <iframe
-        src="https://gifer.com/embed/J4o"
-        width="500"
-        height="230"
-        frameBorder="0"
-        allowFullScreen
-        className="rounded-3xl mt-3"
-      ></iframe>
-    </>
-  );
-}
