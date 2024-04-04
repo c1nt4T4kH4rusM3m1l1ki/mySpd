@@ -6,9 +6,9 @@ import InputSpt from "./InputSpt";
 
 export default function PageSpd() {
   const [dataSPD, setDataSPD] = useState(null);
+  const [load, setLoad]=useState(false)
   const fetcher = (url) => fetch(url).then((res) => res.json());
-
-  const { data, error } = useSWR(process.env.URL_SPD, fetcher);
+  const { data, error, mutate } = useSWR(process.env.URL_SPD, fetcher);
 
   const callData = (item) => {
     let newdata = [];
@@ -33,15 +33,18 @@ export default function PageSpd() {
     if (data) {
       callData(data);
     }
+    setLoad(false)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 
   return (
     <Fragment>
+    
       <div className="ml-10 mt-8">
-        <InputSpt/>
+        <InputSpt setLoad={setLoad} mutate={mutate}/>
       </div>
-      {dataSPD ? <TabelSpd data={dataSPD} /> : <NullData />}
+      {dataSPD && !load ? <TabelSpd data={dataSPD} /> : <NullData />}
+      
     </Fragment>
   );
 }

@@ -1,3 +1,5 @@
+import Select from "@/components/elements/Select";
+import JenisSpt from "@/components/modal/Jenis";
 import { tgllIndo } from "@/lib/fungsiLain";
 import Link from "next/link";
 
@@ -60,10 +62,10 @@ function BodyTable(props) {
               <p className="text-center">{tgllIndo(item.tanggalKembali)}</p>
             </td>
             <td className="border border-black">{item.maksud}</td>
-            <td className="border border-black text-center">xxx</td>
-            <td className="border border-black text-center">xxx</td>
-            <td className="border border-black text-center">xxx</td>
-            <td className="border border-black text-center">xxx</td>
+            <CetakSppd item={item} />
+            <UrlLaporan item={item} />
+
+            {/* Action untuk ke link edit */}
             <td className="border border-black text-center">
               <Link href={`/spd/${item.id}`} className="btn btn-circle btn-xs">
                 <span className="material-symbols-outlined text-cyan-600 hover:text-red-500">
@@ -79,3 +81,73 @@ function BodyTable(props) {
 }
 
 export default TabelSpd;
+
+function CetakSppd({ item }) {
+  
+  return (
+    <td className="border border-black text-center">
+      <ul>
+        <li>
+          <JenisSpt thisId={item.id} item={item}/>
+        </li>
+        <li>
+          <button className="btn btn-xs btn-error my-1">SPD</button>
+        </li>
+        <li>
+          <button className="btn btn-xs btn-warning">Laporan</button>
+        </li>
+      </ul>
+    </td>
+  );
+}
+
+function UrlLaporan({ item }) {
+  return (
+    <>
+      <td className="border border-black text-center">
+        <ol>
+          <li>
+            {item.urlSptWalikota ? (
+              <CloudPrint url={item.urlSptWalikota} profil="Wako" />
+            ) : (
+              ""
+            )}
+          </li>
+          <li>
+            {item.urlSptSekda ? (
+              <CloudPrint url={item.urlSptSekda} profil="Sekda" />
+            ) : (
+              ""
+            )}
+          </li>
+          <li>
+            {item.urlSptKaban ? (
+              <CloudPrint url={item.urlSptKaban} profil="Kaban" />
+            ) : (
+              ""
+            )}
+          </li>
+        </ol>
+      </td>
+      <td className="border border-black text-center">
+        {item.urlSpd ? <CloudPrint url={item.urlSpd} /> : ""}
+      </td>
+      <td className="border border-black text-center">
+        {item.urlLaporan ? <CloudPrint url={item.urlLaporan} /> : ""}
+      </td>
+    </>
+  );
+}
+
+// element
+function CloudPrint(props) {
+  const { url, profil } = props;
+  return (
+    <a href={url} target="blank" className="hover:text-red-600">
+      {profil}
+      <span className="material-symbols-outlined">cloud_upload</span>
+    </a>
+  );
+}
+
+

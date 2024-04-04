@@ -6,6 +6,7 @@ import TextareaLg from "@/components/elements/Textarea";
 import { objSpd, Kendaraan } from "@/lib/data";
 import moment from "moment";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
 export function FormEdit(props) {
@@ -79,13 +80,12 @@ export function FormEdit(props) {
     refSpd.tanggalSpd.current.value = moment(dataSpd.tanggalSpd).format(
       "YYYY-MM-DD"
     );
-    alert('data berhasil di ubah')
   }, [dataSpd]);
 
 
   return (
     <div>
-      <ActionButton setEdit={setEdit} edit={edit} />
+      <ActionButton setEdit={setEdit} edit={edit} spd={dataSpd}/>
       <div className="flex justify-between px-10 mx-10 mt-3">
         <TextareaLg name="Dasar SPT" ref={refSpd.dasar} active={edit} />
         <TextareaLg name="Maksud" ref={refSpd.maksud} active={edit} />
@@ -142,8 +142,23 @@ export function FormEdit(props) {
 }
 
 function ActionButton(props) {
-  const { setEdit, edit } = props;
+  const { setEdit, edit, spd } = props;
 
+  function delHandler(){
+    fetch(process.env.URL_SPD, {
+      method:'POST',
+      mode:'no-cors',
+      headers:{
+        'content-type':'application/json'
+      },
+      body:JSON.stringify({
+        action:'delete',
+        id:spd.id
+      })
+    })
+
+   location.href="/spd"
+  }
 
   function editHandler(){
     setEdit(false)
@@ -171,7 +186,7 @@ function ActionButton(props) {
         </button>
       )}
 
-      <button type="button" className="btn btn-error btn-sm">
+      <button type="button" className="btn btn-error btn-sm" onClick={delHandler}>
         Hapus Data Ini
       </button>
     </div>
