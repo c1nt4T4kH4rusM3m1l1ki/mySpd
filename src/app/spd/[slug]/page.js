@@ -7,6 +7,7 @@ import useSWR from "swr";
 export default function DetailSpd({ params }) {
   const fether = (url) => fetch(url).then((res) => res.json());
   const [pegawai, setPegawai]=useState(null)
+  const [load, setLoad]=useState(false)
   const { data, error } = useSWR(
     process.env.URL_SPD + "?id=" + params.slug,
     fether
@@ -24,8 +25,8 @@ export default function DetailSpd({ params }) {
 
   return (
     <>
-      {data && pegawai ? (
-        <FormEdit dataSpd={data} pegawai={pegawai}/>
+      {data && pegawai && !load ? (
+        <FormEdit dataSpd={data} pegawai={pegawai} setLoad={setLoad}/>
       ) : (
         <div className="flex justify-center my-[200px]">
           <span className="loading loading-spinner text-secondary"></span>

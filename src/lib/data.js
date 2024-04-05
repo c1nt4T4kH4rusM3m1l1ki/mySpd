@@ -11,18 +11,18 @@ export const PangkatGol = [
 ];
 
 export const objPegawai = {
-    id: "",
-    nama: "",
-    nip: "",
-    jabatan: "",
-    pangkat: "",
-    golongan: "",
-    tanggalLahir: "",
-    tingkatSpd: "",
-}
+  id: "",
+  nama: "",
+  nip: "",
+  jabatan: "",
+  pangkat: "",
+  golongan: "",
+  tanggalLahir: "",
+  tingkatSpd: "",
+};
 
-export const objSpd ={
-  id:"",
+export const objSpd = {
+  id: "",
   dasar: "",
   jenisKendaraan: "",
   maksud: "",
@@ -38,7 +38,34 @@ export const objSpd ={
   tujuan1: "",
   tujuan2: "",
   tujuan3: "",
-  tujuanBerangkat: ""
-}
+  tujuanBerangkat: "",
+};
 
-export const Kendaraan = [{nama:"Kendaraan Umum"}, {nama:"Kendaraan Dinas"}, {nama:"Kendaraan Operasional"}];
+export const Kendaraan = [
+  { nama: "Kendaraan Umum" },
+  { nama: "Kendaraan Dinas" },
+  { nama: "Kendaraan Operasional" },
+];
+
+
+export const objEditSpd = {
+  action:"edit",
+  id: "",
+  dasar: "",
+  jenisKendaraan: "",
+  maksud: "",
+  pengikut1: "",
+  pengikut2: "",
+  pengikut3: "",
+  person: "",
+  pptk: "",
+  tanggalBerangkat: "",
+  tanggalKembali: "",
+  tanggalSpd: "",
+  tanggalSpt: "",
+  tujuan1: "",
+  tujuan2: "",
+  tujuan3: "",
+  tujuanBerangkat: "",
+};
+
