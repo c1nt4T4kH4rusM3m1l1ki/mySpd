@@ -57,7 +57,7 @@ export default function InputSpt(props) {
             name="Dasar SPT"
             ref={refSpd.dasar}
             onChange={(e) => {
-              setSpt({ ...spt, id: BuatIdSpt(5), dasar: e.target.value });
+              setSpt({ ...spt, id: BuatIdSpt(9), dasar: e.target.value });
             }}
           />
           <TextareaLg
