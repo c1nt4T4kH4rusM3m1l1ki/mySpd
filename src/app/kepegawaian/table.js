@@ -1,44 +1,17 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import useSWR, { mutate } from "swr";
+
 import { tgllIndo } from "@/lib/fungsiLain";
 import EditKepegawaian from "./EditPegawai";
 
 
 
 const Table = (props) => {
-  const [datapeg, setDatapeg] = useState(null);
-  const fecher = (url) => fetch(url).then((res) => res.json());
-  const {setProses, proses}=props;
-  const { data, error, mutate } = useSWR(process.env.URL_PEG, fecher);
+  
+  const {setProses, proses, data, mutate, datapeg}=props;
+  
 
-  const callDataPeg = (item) => {
-    let newdata = [];
-    for (let i = item.length + 1; i > 0; i--) {
-      if (item[i] !== undefined) {
-        newdata.push(item[i]);
-      }
-    }
-    setDatapeg(newdata);
-  };
-
-  useEffect(() => {
-    if (data) {
-      callDataPeg(data);
-    }
-    
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
-    
-    if (data) {
-      callDataPeg(data);
-    }
-    setProses(false)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data]);
+ 
 
 
   return (
@@ -68,31 +41,31 @@ const Body = (props) => {
 
   return (
     <tbody>
-      {data &&!proses? (
+      {data ? (
         data.map((item) => (
           <tr key={item.id}>
             <td className="hidden w-20">{item.id}</td>
             <td>
-              <EditKepegawaian nama={item.nama} id={item.id} data={item} setProses={setProses} mut={mutate}/>
+              <EditKepegawaian nama={item.nama} id={item.id} data={item} setProses={setProses} mutate={mutate}/>
             </td>
             <td>
-              <EditKepegawaian nama={item.nip} id={item.id} data={item} setProses={setProses} mut={mutate}/>
+              <EditKepegawaian nama={item.nip} id={item.id} data={item} setProses={setProses} mutate={mutate}/>
             </td>
             <td>
-              <EditKepegawaian nama={item.pangkat} id={item.id} data={item} setProses={setProses} mut={mutate}/>
+              <EditKepegawaian nama={item.pangkat} id={item.id} data={item} setProses={setProses} mutate={mutate}/>
             </td>
             <td className=" w-20">
-              <EditKepegawaian nama={item.golongan} id={item.id} data={item} setProses={setProses} mut={mutate}/>
+              <EditKepegawaian nama={item.golongan} id={item.id} data={item} setProses={setProses} mutate={mutate}/>
             </td>
             <td>
-              <EditKepegawaian nama={item.jabatan} id={item.id} data={item} setProses={setProses} mut={mutate}/>
+              <EditKepegawaian nama={item.jabatan} id={item.id} data={item} setProses={setProses} mutate={mutate}/>
             </td>
             <td className="text-end">
               <EditKepegawaian
                 nama={tgllIndo(item.tanggalLahir)}
                 id={item.id}
                 data={item}
-                setProses={setProses} mut={mutate}
+                setProses={setProses} mutate={mutate}
               />
             </td>
             <td className="text-center">
@@ -100,12 +73,12 @@ const Body = (props) => {
                 nama={item.tingkatSpd}
                 id={item.id}
                 data={item}
-                setProses={setProses} mut={mutate}
+                setProses={setProses} mutate={mutate}
 
               />
             </td>
             <td>
-              <Hapus nama={item.nama} idItem={item.id} setProses={setProses} mut={mutate} />
+              <Hapus nama={item.nama} idItem={item.id} setProses={setProses} mutate={mutate} />
             </td>
           </tr>
         ))

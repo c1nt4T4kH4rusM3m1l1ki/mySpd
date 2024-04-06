@@ -68,8 +68,8 @@ export function BuatIdSpt(length) {
 }
 
 
-export function TambahPeg(dataPegawai){
-  fetch(process.env.URL_PEG, {
+export async function TambahPeg(dataPegawai){
+  await fetch(process.env.URL_PEG, {
     method: "POST",
     mode: "no-cors",
     headers: {

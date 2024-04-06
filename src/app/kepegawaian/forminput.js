@@ -5,7 +5,7 @@ import { ubahGolongan } from "@/lib/fungsiLain";
 import { BuatId, TambahPeg } from "@/lib/fungsiLain";
 
 const TambahPegawai = (props) => {
-  const { setProses } = props;
+  const { setProses, mutate } = props;
   return (
     <div className="drawer mt-5">
       <input id="my-drawer" type="checkbox" className="drawer-toggle" />
@@ -29,7 +29,7 @@ const TambahPegawai = (props) => {
           </h1>
           {/* tempatkan isian */}
           <div className="p-3">
-            <FormInput setProses={setProses} />
+            <FormInput setProses={setProses} mutate={mutate} />
           </div>
         </div>
       </div>
@@ -39,11 +39,12 @@ const TambahPegawai = (props) => {
 
 const FormInput = (props) => {
   const [dataPeg, setDataPeg] = useState(objPegawai);
-  const {setProses } = props;
+  const { setProses, mutate } = props;
 
-function Tambah() {
-    setProses(true)
-    TambahPeg(dataPeg)
+  async function Tambah() {
+    setProses(true);
+    await TambahPeg(dataPeg)
+    .then(location.href="/kepegawaian");
   }
 
   return (
@@ -54,7 +55,7 @@ function Tambah() {
           type="text"
           className="grow"
           onChange={(e) => {
-            setDataPeg({ ...dataPeg, nama: e.target.value, id:BuatId(5) });
+            setDataPeg({ ...dataPeg, nama: e.target.value, id: BuatId(9) });
           }}
         />
       </label>

@@ -5,7 +5,7 @@ import { PangkatGol, objPegawai } from "@/lib/data";
 import { TambahPeg, ubahGolongan } from "@/lib/fungsiLain";
 
 const EditKepegawaian = (props) => {
-  const { nama, id, data, setProses, mut } = props;
+  const { nama, id, data, setProses, mutate } = props;
   const [edit, setEdit] = useState(true);
   const [dataPeg, setDataPeg] = useState(objPegawai);
 
@@ -59,14 +59,11 @@ const EditKepegawaian = (props) => {
     });
   }
 
-  const simpanHendler = () => {
+  const simpanHendler = async () => {
     setProses(true);
-    TambahPeg(dataPeg);
-    setEdit(true);
-
-    setTimeout(()=>{
-      mut();
-    },2000)
+    setEdit(true)
+    await TambahPeg(dataPeg)
+    .then(location.href="/kepegawaian")
   };
 
   return (
