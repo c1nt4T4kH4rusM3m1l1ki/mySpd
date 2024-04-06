@@ -1,10 +1,12 @@
-import Select from "@/components/elements/Select";
+"use clinet";
+
 import JenisSpt from "@/components/modal/Jenis";
-import { tgllIndo } from "@/lib/fungsiLain";
+import { MakeLap, MakeSpd, tgllIndo } from "@/lib/fungsiLain";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 const TabelSpd = (props) => {
-  const { data } = props;
+  const { data, mutate } = props;
 
   return (
     <div className="overflow-x-auto px-10 mt-5 mb-16 h-[370px] ">
@@ -34,21 +36,22 @@ const TabelSpd = (props) => {
             <th className="border border-black">Laporan</th>
           </tr>
         </thead>
-        <BodyTable data={data} />
+        <BodyTable data={data} mutate={mutate} />
       </table>
     </div>
   );
 };
 
 function BodyTable(props) {
-  const { data } = props;
+  const { data, mutate } = props;
+  const [urlLoad, setUrlLoad] = useState(true);
 
   return (
     <tbody>
       {data.map((item, i) => {
         return (
           <tr className="border border-black" key={item.id}>
-            <td className="border border-black">
+            <td className="inline-block align-top">
               <ul>
                 <li>{item.person}</li>
                 <li>{item.pengikut1}</li>
@@ -56,14 +59,14 @@ function BodyTable(props) {
                 <li>{item.pengikut3}</li>
               </ul>
             </td>
-            <td className="border border-black">
+            <td className="border border-black align-top">
               <p className="text-center">{tgllIndo(item.tanggalBerangkat)}</p>
               <p className="text-center">sampai</p>
               <p className="text-center">{tgllIndo(item.tanggalKembali)}</p>
             </td>
-            <td className="border border-black">{item.maksud}</td>
-            <CetakSppd item={item} />
-            <UrlLaporan item={item} />
+            <td className="border border-black align-top">{item.maksud}</td>
+            <CetakSppd item={item} mutate={mutate} setUrlLoad={setUrlLoad} />
+            <UrlLaporan item={item} urlLoad={urlLoad} setUrlLoad={setUrlLoad} />
 
             {/* Action untuk ke link edit */}
             <td className="border border-black text-center">
@@ -82,46 +85,77 @@ function BodyTable(props) {
 
 export default TabelSpd;
 
-function CetakSppd({ item }) {
-  
+function CetakSppd({ item, setUrlLoad, mutate }) {
   return (
     <td className="border border-black text-center">
       <ul>
         <li>
-          <JenisSpt thisId={item.id} item={item}/>
+          <JenisSpt thisId={item.id} item={item} setUrlLoad={setUrlLoad} mutate={mutate}/>
         </li>
         <li>
-          <button className="btn btn-xs btn-error my-1">SPD</button>
+          <label
+            className="btn btn-xs btn-error my-1"
+            onClick={() => {
+              setUrlLoad(true);
+              MakeSpd(item.id);
+              setTimeout(() => {
+                mutate();
+              }, 5000);
+            }}
+          >
+            SPD
+          </label>
         </li>
         <li>
-          <button className="btn btn-xs btn-warning">Laporan</button>
+          <label
+            className="btn btn-xs btn-warning"
+            onClick={() => {
+              setUrlLoad(true);
+              MakeLap(item.id);
+              setTimeout(() => {
+                mutate();
+              }, 5000);
+            }}
+          >
+            Laporan
+          </label>
         </li>
       </ul>
     </td>
   );
 }
 
-function UrlLaporan({ item }) {
+function UrlLaporan({ item, urlLoad, setUrlLoad }) {
+  useEffect(() => {
+    setUrlLoad(false);
+  }, [item]);
   return (
     <>
       <td className="border border-black text-center">
         <ol>
           <li>
-            {item.urlSptWalikota ? (
+            {urlLoad ? (
+              <span className="loading loading-bars loading-xs"></span>
+            ) : item.urlSptWalikota ? (
               <CloudPrint url={item.urlSptWalikota} profil="Wako" />
             ) : (
               ""
             )}
+            {}
           </li>
           <li>
-            {item.urlSptSekda ? (
+            {urlLoad ? (
+              <span className="loading loading-bars loading-xs"></span>
+            ) : item.urlSptSekda ? (
               <CloudPrint url={item.urlSptSekda} profil="Sekda" />
             ) : (
               ""
             )}
           </li>
           <li>
-            {item.urlSptKaban ? (
+            {urlLoad ? (
+              <span className="loading loading-bars loading-xs"></span>
+            ) : item.urlSptKaban ? (
               <CloudPrint url={item.urlSptKaban} profil="Kaban" />
             ) : (
               ""
@@ -130,10 +164,22 @@ function UrlLaporan({ item }) {
         </ol>
       </td>
       <td className="border border-black text-center">
-        {item.urlSpd ? <CloudPrint url={item.urlSpd} /> : ""}
+        {urlLoad ? (
+          <span className="loading loading-bars loading-xs"></span>
+        ) : item.urlSpd ? (
+          <CloudPrint url={item.urlSpd} />
+        ) : (
+          ""
+        )}
       </td>
       <td className="border border-black text-center">
-        {item.urlLaporan ? <CloudPrint url={item.urlLaporan} /> : ""}
+        {urlLoad ? (
+          <span className="loading loading-bars loading-xs"></span>
+        ) : item.urlLaporan ? (
+          <CloudPrint url={item.urlLaporan} />
+        ) : (
+          ""
+        )}
       </td>
     </>
   );
@@ -149,5 +195,3 @@ function CloudPrint(props) {
     </a>
   );
 }
-
-

@@ -78,3 +78,43 @@ export async function TambahPeg(dataPegawai){
     body: JSON.stringify(dataPegawai),
   })
 }
+
+export const MakeSpt= async(id, tipe)=>{
+  await fetch(process.env.MK_SPT,{
+    method:'POST',
+    mode:'no-cors',
+    headers:{
+      'content-type':'application/json'
+    },
+    body:JSON.stringify({
+      id,
+      tipe
+    })
+  })
+}
+
+export const MakeSpd= async(id)=>{
+  await fetch(process.env.MK_SPD,{
+    method:'POST',
+    mode:'no-cors',
+    headers:{
+      'content-type':'application/json'
+    },
+    body:JSON.stringify({
+      id:id
+    })
+  })
+}
+
+export const MakeLap= async(id)=>{
+  await fetch(process.env.MK_LAP,{
+    method:'POST',
+    mode:'no-cors',
+    headers:{
+      'content-type':'application/json'
+    },
+    body:JSON.stringify({
+      id:id
+    })
+  })
+}

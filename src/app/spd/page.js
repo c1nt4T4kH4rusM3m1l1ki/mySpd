@@ -43,7 +43,7 @@ export default function PageSpd() {
       <div className="ml-10 mt-8">
         <InputSpt setLoad={setLoad} mutate={mutate}/>
       </div>
-      {dataSPD && !load ? <TabelSpd data={dataSPD} /> : <NullData />}
+      {dataSPD && !load ? <TabelSpd data={dataSPD} mutate={mutate}/> : <NullData />}
       
     </Fragment>
   );
