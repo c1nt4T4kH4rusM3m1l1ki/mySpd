@@ -3,13 +3,26 @@ import { Fragment, useEffect, useState } from "react";
 import TabelSpd from "./table";
 import useSWR from "swr";
 import InputSpt from "./InputSpt";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 export default function PageSpd() {
   const [dataSPD, setDataSPD] = useState(null);
   const [load, setLoad]=useState(false)
   const fetcher = (url) => fetch(url).then((res) => res.json());
   const { data, error, mutate } = useSWR(process.env.URL_SPD, fetcher);
+  
+  // fungsi login
+  const {data:session, status}= useSession()
+  const router = useRouter()
+  useEffect(()=>{
+    if(status==='unauthenticated'){
+      router.push("/login")
+    }
+    
+  },[status, router])
 
+  // pengambilan data
   const callData = (item) => {
     let newdata = [];
     for (let i = item.length-1; i > -1; i--) {
@@ -18,12 +31,11 @@ export default function PageSpd() {
       }
     }
     setDataSPD(newdata);
-  };
+  }; 
 
   useEffect(() => {
     if (data) {
       callData(data);
-      
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -1,5 +1,7 @@
 "use client";
-import { useState } from "react";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
 
 export default function Login() {
   return (
@@ -9,12 +11,12 @@ export default function Login() {
           PERHATIAN !!
         </h1>
         <p className="text-xl text-center mt-3 px-4">
-          Sebagaimana Peraturan Standar Pada Setiap Aplikasi. Tentu saja Anda Harus Masukan
-          Password Untuk Memulai Menggunakan Aplikasi ini !!!
+          Sebagaimana Peraturan Standar Pada Setiap Aplikasi. Tentu saja Anda
+          Harus Masukan Password Untuk Memulai Menggunakan Aplikasi ini !!!
         </p>
       </div>
       <div className="flex justify-center">
-      <LoginForm />
+        <LoginForm />
       </div>
     </div>
   );
@@ -22,31 +24,64 @@ export default function Login() {
 
 function LoginForm() {
   const [visible, setVisible] = useState(false);
+  const [valueInput, setValueInput] = useState("");
+  const [warnaPassword, setWarnaPass] = useState("text-red-700");
+  const { push } = useRouter();
+
+  useEffect(() => {
+    if (valueInput === "spenuh2024") {
+      setWarnaPass("text-emerald-600");
+    } else {
+      setWarnaPass("text-red-700");
+    }
+  }, [valueInput]);
+
   return (
     <div className=" my-[135px] rounded-2xl w-7/12 bg-cyan-300 shadow-lg shadow-cyan-500/50 p-10">
       <span className="font-bold">PASSWORD:</span>
       <label className="input input-bordered flex items-center gap-2 mt-3">
         <input
           type={visible ? "text" : "password"}
-          className="grow text-emerald-700"
+          className={`grow ${warnaPassword}`}
+          onChange={(e) => setValueInput(e.target.value)}
         />
         {visible ? (
-          <Terlihat set={setVisible} />
+          <Terlihat set={setVisible} color={warnaPassword} />
         ) : (
-          <TakTerlihat set={setVisible} />
+          <TakTerlihat set={setVisible} color={warnaPassword} />
         )}
       </label>
       <div className="mt-5 flex justify-end">
-        <button className="btn btn-warning shadow-yellow-100/10 ">LOGIN</button>
+        <label
+          className="btn btn-warning shadow-yellow-100/10 "
+          onClick={async () => {
+            try {
+              const res = await signIn("credentials", {
+                redirect: false,
+                password: valueInput,
+                callbackUrl: "/spd",
+              });
+              if (!res?.error) {
+                push("/spd");
+              } else {
+                console.log(res.error);
+              }
+            } catch (err) {
+              console.log(err);
+            }
+          }}
+        >
+          LOGIN
+        </label>
       </div>
     </div>
   );
 }
 
-function TakTerlihat({ set }) {
+function TakTerlihat({ set, color }) {
   return (
     <span
-      className="material-symbols-outlined btn btn-xs glass text-emerald-700"
+      className={`material-symbols-outlined btn btn-xs glass ${color}`}
       onClick={() => {
         set(true);
       }}
@@ -56,10 +91,10 @@ function TakTerlihat({ set }) {
   );
 }
 
-function Terlihat({ set }) {
+function Terlihat({ set, color }) {
   return (
     <span
-      className="material-symbols-outlined btn btn-xs glass text-emerald-700"
+      className={`material-symbols-outlined btn btn-xs glass ${color}`}
       onClick={() => {
         set(false);
       }}
