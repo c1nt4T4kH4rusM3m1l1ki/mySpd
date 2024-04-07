@@ -1,6 +1,5 @@
 import NextAuth from "next-auth";
-import CredentialProvider from "next-auth/providers/credentials";
-import { signIn } from "next-auth/react";
+import CredentialProvider from "next-auth/providers/credentials"; 
 
 const authOptions = {
   session: {
@@ -19,7 +18,7 @@ const authOptions = {
         const { password } = credentials;
         if (password === "spenuh2024") {
           return {
-            id: 1,
+            id: "userOne",
             name: "user",
             role: "user",
           };

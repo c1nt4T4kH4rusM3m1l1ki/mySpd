@@ -1,3 +1,4 @@
+import { parseCookies } from 'nookies';
 export function tgllIndo(tgl){
     const tanggal = new Date(tgl);
     const tanggalIndonesia = tanggal.toLocaleDateString('id-ID', {
@@ -117,4 +118,10 @@ export const MakeLap= async(id)=>{
       id:id
     })
   })
+}
+
+export async function IsLogin(){
+  const res = await fetch('http://localhost:3000/api/auth/session')
+  const data = await res.json()
+  return data
 }

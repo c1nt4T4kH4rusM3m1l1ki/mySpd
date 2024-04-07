@@ -1,9 +1,11 @@
 "use client";
+import { useLogOut } from "@/lib/hook";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
 export default function Login() {
+  useLogOut()
   return (
     <div className="grid grid-cols-2">
       <div className="mt-16 p-12 ml-5">

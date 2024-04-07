@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "./navbar";
 import { SessionProvider } from "next-auth/react";
 
+
 const poorStory = Poor_Story({
   subsets: ["latin"],
   weight: "400",
@@ -11,6 +12,8 @@ const poorStory = Poor_Story({
 });
 
 export default function RootLayout({ children }) {
+ 
+
   return (
     <html lang="id">
       <head>
