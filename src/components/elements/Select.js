@@ -15,7 +15,7 @@ const Select = forwardRef(function Select(props, ref) {
         ref={ref}
         style={disableColor}
       >
-        <option>pilih</option>
+        <option value={''}></option>
         {isi.map((e, i) => {
           return <option key={i}>{e.nama}</option>;
         })}
