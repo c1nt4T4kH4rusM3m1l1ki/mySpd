@@ -4,13 +4,13 @@ import Select from "../elements/Select";
 import { MakeSpt } from "@/lib/fungsiLain";
 
 export default function JenisSpt(props) {
-  const {thisId, item, setUrlLoad, mutate}=props;
+  const {thisId, item, setUrlLoad, urlLoad, mutate}=props;
   const tipe = useRef();
   const jenisSpt = [{ nama: "Kaban" }, { nama: "Sekda" }, { nama: "Walikota" }];
   return (
     <>
       {/* The button to open modal */}
-      <label htmlFor={thisId} className="btn btn-xs btn-accent">
+      <label htmlFor={thisId} className="btn btn-xs btn-accent" disabled={urlLoad}>
         SPT
       </label>
 

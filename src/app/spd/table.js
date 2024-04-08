@@ -65,7 +65,12 @@ function BodyTable(props) {
               <p className="text-center">{tgllIndo(item.tanggalKembali)}</p>
             </td>
             <td className="border border-black align-top">{item.maksud}</td>
-            <CetakSppd item={item} mutate={mutate} setUrlLoad={setUrlLoad} />
+            <CetakSppd
+              item={item}
+              mutate={mutate}
+              setUrlLoad={setUrlLoad}
+              urlLoad={urlLoad}
+            />
             <UrlLaporan item={item} urlLoad={urlLoad} setUrlLoad={setUrlLoad} />
 
             {/* Action untuk ke link edit */}
@@ -85,15 +90,22 @@ function BodyTable(props) {
 
 export default TabelSpd;
 
-function CetakSppd({ item, setUrlLoad, mutate }) {
+function CetakSppd({ item, urlLoad, setUrlLoad, mutate }) {
   return (
     <td className="border border-black text-center">
       <ul>
         <li>
-          <JenisSpt thisId={item.id} item={item} setUrlLoad={setUrlLoad} mutate={mutate}/>
+          <JenisSpt
+            thisId={item.id}
+            item={item}
+            setUrlLoad={setUrlLoad}
+            mutate={mutate}
+            urlLoad={urlLoad}
+          />
         </li>
         <li>
           <label
+            disabled={urlLoad}
             className="btn btn-xs btn-error my-1"
             onClick={() => {
               setUrlLoad(true);
@@ -108,6 +120,7 @@ function CetakSppd({ item, setUrlLoad, mutate }) {
         </li>
         <li>
           <label
+            disabled={urlLoad}
             className="btn btn-xs btn-warning"
             onClick={() => {
               setUrlLoad(true);
