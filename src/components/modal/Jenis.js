@@ -1,7 +1,7 @@
 'use client'
 import { useRef } from "react";
 import Select from "../elements/Select";
-import { MakeSpt } from "@/lib/fungsiLain";
+import { MakeSpt, updateSPD } from "@/lib/fungsiLain";
 
 export default function JenisSpt(props) {
   const {thisId, item, setUrlLoad, urlLoad, mutate}=props;
@@ -24,9 +24,8 @@ export default function JenisSpt(props) {
             <label htmlFor={thisId} className="btn btn-md btn-error" onClick={()=>{
               setUrlLoad(true)
               MakeSpt(item.id, tipe.current.value)
-              setTimeout(()=>{
-                mutate()
-              }, 3000)
+              mutate()
+              updateSPD()
             }}>
               Ok Lanjut
             </label>

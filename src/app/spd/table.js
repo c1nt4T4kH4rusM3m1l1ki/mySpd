@@ -1,7 +1,7 @@
 "use clinet";
 
 import JenisSpt from "@/components/modal/Jenis";
-import { MakeLap, MakeSpd, tgllIndo } from "@/lib/fungsiLain";
+import { MakeLap, MakeSpd, tgllIndo, updateSPD } from "@/lib/fungsiLain";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -110,9 +110,8 @@ function CetakSppd({ item, urlLoad, setUrlLoad, mutate }) {
             onClick={() => {
               setUrlLoad(true);
               MakeSpd(item.id);
-              setTimeout(() => {
-                mutate();
-              }, 3000);
+              mutate();
+              updateSPD()
             }}
           >
             SPD
@@ -125,9 +124,8 @@ function CetakSppd({ item, urlLoad, setUrlLoad, mutate }) {
             onClick={() => {
               setUrlLoad(true);
               MakeLap(item.id);
-              setTimeout(() => {
-                mutate();
-              }, 3000);
+              mutate();
+              updateSPD()
             }}
           >
             Laporan

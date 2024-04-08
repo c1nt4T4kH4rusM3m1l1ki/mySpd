@@ -1,63 +1,79 @@
 "use client";
 import ModalLogOut from "@/components/modal/logOut";
-import { signIn, signOut, useSession } from "next-auth/react";
+import { useLogin } from "@/lib/hook";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { useParams, usePathname, useRouter } from "next/navigation";
 
 import React from "react";
 
 const Navbar = () => {
   const param = usePathname();
+  let setelah = useParams();
 
   return (
     <div className="navbar bg-base-100">
       <StartNavbar />
-      <div className="navbar-center lg:flex">
-        <ul className="menu menu-horizontal font-bold text-lg px-1">
-          <li>
-            <Link
-              href={"/"}
-              className={`hover:scale-110 hover:text-pink-600 hover:rotate-[-6deg] ${
-                param == "/" ? "text-pink-600 text-2xl rotate-[-6deg]" : ""
-              }`}
-            >
-              <span className="material-symbols-outlined text-salmon">
-                location_home
-              </span>
-              Home
-            </Link>
-          </li>
-          <li>
-            <Link
-              href={"/spd"}
-              className={`hover:scale-110 hover:text-pink-600 hover:rotate-[-6deg] ${
-                param == "/spd" ? "text-pink-600 text-2xl rotate-[-6deg]" : ""
-              }`}
-            >
-              <span className="material-symbols-outlined text-emerald-500">
-                design_services
-              </span>
-              Buat Spt
-            </Link>
-          </li>
-          <li>
-            <Link
-              href={"/kepegawaian"}
-              className={`hover:scale-110 hover:text-pink-600 hover:rotate-[-6deg] ${
-                param == "/kepegawaian"
-                  ? "text-pink-600 text-2xl rotate-[-6deg]"
-                  : ""
-              }`}
-            >
-              <span className="material-symbols-outlined text-cyan-600">
-                badge
-              </span>
-              Kepegawaian
-            </Link>
-          </li>
-        </ul>
-      </div>
+      {
+        (param=="/login" ? (
+          <div></div>
+        ) : (
+          <MiddleBar param={param} setelah={setelah} />
+        ))
+      }
       <LogOut />
+    </div>
+  );
+};
+
+const MiddleBar = ({ param, setelah }) => {
+  return (
+    <div className="navbar-center lg:flex">
+      <ul className="menu menu-horizontal font-bold text-lg px-1">
+        <li>
+          <Link
+            href={"/"}
+            className={`hover:scale-110 hover:text-pink-600 hover:rotate-[-6deg] ${
+              param == "/" ? "text-pink-600 text-2xl rotate-[-6deg]" : ""
+            }`}
+          >
+            <span className="material-symbols-outlined text-salmon">
+              location_home
+            </span>
+            Home
+          </Link>
+        </li>
+        <li>
+          <Link
+            href={"/spd"}
+            className={`hover:scale-110 hover:text-pink-600 hover:rotate-[-6deg] ${
+              param == `/spd/${setelah.slug}` || param == "/spd"
+                ? "text-pink-600 text-2xl rotate-[-6deg]"
+                : ""
+            }`}
+          >
+            <span className="material-symbols-outlined text-emerald-500">
+              design_services
+            </span>
+            Buat Spt
+          </Link>
+        </li>
+        <li>
+          <Link
+            href={"/kepegawaian"}
+            className={`hover:scale-110 hover:text-pink-600 hover:rotate-[-6deg] ${
+              param == "/kepegawaian"
+                ? "text-pink-600 text-2xl rotate-[-6deg]"
+                : ""
+            }`}
+          >
+            <span className="material-symbols-outlined text-cyan-600">
+              badge
+            </span>
+            Kepegawaian
+          </Link>
+        </li>
+      </ul>
     </div>
   );
 };
@@ -78,7 +94,7 @@ const LogOut = () => {
   return (
     <div className="navbar-end font-bold ">
       {status === "authenticated" ? (
-        <ModalLogOut/>
+        <ModalLogOut />
       ) : (
         <a
           className="btn btn-circle btn-outline"

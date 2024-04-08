@@ -5,10 +5,8 @@ import Renewdata from "./renewdata";
 import Table from "./table";
 import useSWR, {mutate} from "swr";
 import { useEffect,  useState } from "react";
-import { useLogin } from "@/lib/hook";
 
 const Kepegawaian = () => {
-  useLogin()
   const [proses, setProses] = useState(false);
   const fecher = (url) => fetch(url).then((res) => res.json());
   const {data, error}=useSWR(process.env.URL_PEG, fecher,{

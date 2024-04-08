@@ -18,7 +18,7 @@ export const useLogOut = ()=>{
     const route = useRouter()
     useEffect(()=>{
         if(status === 'authenticated'){
-            route.push('/spd')
+            route.push('/')
         }
     },[session, route, status])
 }
