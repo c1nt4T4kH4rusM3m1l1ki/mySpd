@@ -112,7 +112,7 @@ function CetakSppd({ item, urlLoad, setUrlLoad, mutate }) {
               MakeSpd(item.id);
               setTimeout(() => {
                 mutate();
-              }, 5000);
+              }, 3000);
             }}
           >
             SPD
@@ -127,7 +127,7 @@ function CetakSppd({ item, urlLoad, setUrlLoad, mutate }) {
               MakeLap(item.id);
               setTimeout(() => {
                 mutate();
-              }, 5000);
+              }, 3000);
             }}
           >
             Laporan
