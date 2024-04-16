@@ -32,18 +32,8 @@ export default function PageSpd() {
     if (data) {
       callData(data);
     }
-    setLoad(false)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
-    if (data) {
-      callData(data);
-    }
-    setLoad(false)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    setLoad(false);
   }, [data]);
-
 
   return (
     <Fragment>

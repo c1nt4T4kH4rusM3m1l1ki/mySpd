@@ -1,15 +1,16 @@
 'use client'
-import { Poor_Story } from "next/font/google";
-import "./globals.css";
-import Navbar from "./navbar";
-import { SessionProvider } from "next-auth/react";
 
+import { SessionProvider } from "next-auth/react";
+import Navbar from "./navbar";
+import Footer from "./Footer"; // Asumsi Footer dipindah ke file terpisah
+import 'tailwindcss/tailwind.css';
+import { Poor_Story } from "next/font/google";
 
 const poorStory = Poor_Story({
   subsets: ["latin"],
   weight: "400",
   display: "swap",
-});
+});// Asumsi Anda menggunakan CSS Modules
 
 export default function RootLayout({ children }) {
  
@@ -31,17 +32,4 @@ export default function RootLayout({ children }) {
         </SessionProvider>
       </body>
     </html>
-  );
-}
-
-const Footer = () => {
-  return (
-    <footer>
-      <div className="relative">
-        <div className="fixed bottom-0 right-5 h-10 text-base text-cyan-800">
-          <span>Copyright @ 2024 By. Rindra Aniko (Version : 05.00.01)</span>
-        </div>
-      </div>
-    </footer>
-  );
-};
+  );}

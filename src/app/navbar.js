@@ -1,6 +1,5 @@
 "use client";
 import ModalLogOut from "@/components/modal/logOut";
-import { useLogin } from "@/lib/hook";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useParams, usePathname, useRouter } from "next/navigation";
@@ -15,7 +14,7 @@ const Navbar = () => {
     <div className="navbar bg-base-100">
       <StartNavbar />
       {
-        (param=="/login" ? (
+        (param==="/login" ? (
           <div></div>
         ) : (
           <MiddleBar param={param} setelah={setelah} />
@@ -34,7 +33,7 @@ const MiddleBar = ({ param, setelah }) => {
           <Link
             href={"/"}
             className={`hover:scale-110 hover:text-pink-600 hover:rotate-[-6deg] ${
-              param == "/" ? "text-pink-600 text-2xl rotate-[-6deg]" : ""
+              param === "/" ? "text-pink-600 text-2xl rotate-[-6deg]" : ""
             }`}
           >
             <span className="material-symbols-outlined text-salmon">
@@ -47,13 +46,13 @@ const MiddleBar = ({ param, setelah }) => {
           <Link
             href={"/spd"}
             className={`hover:scale-110 hover:text-pink-600 hover:rotate-[-6deg] ${
-              param == `/spd/${setelah.slug}` || param == "/spd"
+              param === `/spd/${setelah.slug}` || param === "/spd"
                 ? "text-pink-600 text-2xl rotate-[-6deg]"
                 : ""
             }`}
           >
             <span className="material-symbols-outlined text-emerald-500">
-              design_services
+              flight
             </span>
             Buat Spt
           </Link>
@@ -62,7 +61,7 @@ const MiddleBar = ({ param, setelah }) => {
           <Link
             href={"/kepegawaian"}
             className={`hover:scale-110 hover:text-pink-600 hover:rotate-[-6deg] ${
-              param == "/kepegawaian"
+              param === "/kepegawaian"
                 ? "text-pink-600 text-2xl rotate-[-6deg]"
                 : ""
             }`}
@@ -81,15 +80,15 @@ const MiddleBar = ({ param, setelah }) => {
 const StartNavbar = () => {
   return (
     <div className="navbar-start">
-      <a className="transition hover:rotate-[-25deg] duration-500 hover:font-extralight font-bold text-cyan-600 ml-2 hover:scale-110 hover:text-stone-600 hover:underline text-3xl">
+      <Link href={"/"} className="transition hover:rotate-[-25deg] duration-500 hover:font-extralight font-bold text-cyan-600 ml-2 hover:scale-110 hover:text-stone-600 hover:underline text-3xl">
         MySPD
-      </a>
+      </Link>
     </div>
   );
 };
 
 const LogOut = () => {
-  const { session, status } = useSession();
+  const { status } = useSession();
   const { push } = useRouter();
   return (
     <div className="navbar-end font-bold ">

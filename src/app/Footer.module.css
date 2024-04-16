@@ -1,0 +1,8 @@
+.footer {
+    position: fixed;
+    bottom: 0;
+    right: 5px;
+    height: 10px;
+    text-align: right;
+    color: #0891b2; /* Cyan-800 */
+  }

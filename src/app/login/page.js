@@ -26,18 +26,36 @@ function LoginForm() {
   const [visible, setVisible] = useState(false);
   const [valueInput, setValueInput] = useState("");
   const [warnaPassword, setWarnaPass] = useState("text-red-700");
+  const [loading, setLoading] = useState(false);
   const { push } = useRouter();
 
   useEffect(() => {
-    if (valueInput === "spenuh2024") {
-      setWarnaPass("text-emerald-600");
-    } else {
-      setWarnaPass("text-red-700");
-    }
+    setWarnaPass(valueInput === "spenuh2024" ? "text-emerald-600" : "text-red-700");
   }, [valueInput]);
 
+  const handleLogin = async () => {
+    try {
+      setLoading(true);
+      const res = await signIn("credentials", {
+        redirect: false,
+        password: valueInput,
+        callbackUrl: "/",
+      });
+      if (!res?.error) {
+        push("/");
+      } else {
+        alert("Password Salah");
+        location.reload();
+      }
+    } catch (err) {
+      alert("Terjadi kesalahan saat login");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
-    <div className=" my-[135px] rounded-2xl w-7/12 bg-cyan-300 shadow-lg shadow-cyan-500/50 p-10">
+    <div className="my-[135px] rounded-2xl w-7/12 bg-cyan-300 shadow-lg shadow-cyan-500/50 p-10">
       <span className="font-bold">PASSWORD:</span>
       <label className="input input-bordered flex items-center gap-2 mt-3">
         <input
@@ -46,60 +64,31 @@ function LoginForm() {
           onChange={(e) => setValueInput(e.target.value)}
         />
         {visible ? (
-          <Terlihat set={setVisible} color={warnaPassword} />
+          <IconVisibility set={setVisible} color={warnaPassword} visible />
         ) : (
-          <TakTerlihat set={setVisible} color={warnaPassword} />
+          <IconVisibility set={setVisible} color={warnaPassword} />
         )}
       </label>
       <div className="mt-5 flex justify-end">
-        <label
-          className="btn btn-warning shadow-yellow-100/10 "
-          onClick={async () => {
-            try {
-              const res = await signIn("credentials", {
-                redirect: false,
-                password: valueInput,
-                callbackUrl: "/",
-              });
-              if (!res?.error) {
-                push("/");
-              } else {
-                console.log(res.error);
-              }
-            } catch (err) {
-              console.log(err);
-            }
-          }}
+        <button
+          disabled={loading}
+          className="btn btn-warning shadow-yellow-100/10"
+          onClick={handleLogin}
         >
-          LOGIN
-        </label>
+          {loading ? "Memuat..." : "LOGIN"}
+        </button>
       </div>
     </div>
   );
 }
 
-function TakTerlihat({ set, color }) {
+function IconVisibility({ set, color, visible = false }) {
   return (
     <span
       className={`material-symbols-outlined btn btn-xs glass ${color}`}
-      onClick={() => {
-        set(true);
-      }}
+      onClick={() => set(!visible)}
     >
-      visibility_off
-    </span>
-  );
-}
-
-function Terlihat({ set, color }) {
-  return (
-    <span
-      className={`material-symbols-outlined btn btn-xs glass ${color}`}
-      onClick={() => {
-        set(false);
-      }}
-    >
-      visibility
+      {visible ? "visibility" : "visibility_off"}
     </span>
   );
 }
