@@ -167,10 +167,13 @@ function ActionSpt(props) {
         body: JSON.stringify(spt),
       });
       // Setelah permintaan berhasil, panggil mutate() untuk memperbarui data
-      mutate();
+      mutate(process.env.URL_SPD);
     } catch (error) {
       console.error("Terjadi kesalahan:", error);
       // Tangani kesalahan sesuai kebutuhan Anda
+      alert("Gagal menambah SPT :"+error);
+    } finally {
+      setLoad(false);
     }
   };
 

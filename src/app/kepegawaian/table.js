@@ -96,7 +96,7 @@ const Body = (props) => {
 };
 
 function Hapus(props) {
-  const { idItem, nama, setProses, mut } = props;
+  const { idItem, nama, setProses, mutate } = props;
 
   function DelHandler(){
     setProses(true)
@@ -111,8 +111,8 @@ function Hapus(props) {
         id:idItem
       })
     })
-    setTimeout(()=>{  
-      mut();
+    setTimeout(async()=>{  
+      await mutate(process.env.URL_PEG);
     },
       3000)
   }

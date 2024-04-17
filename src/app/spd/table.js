@@ -1,7 +1,7 @@
 "use clinet";
 
 import JenisSpt from "@/components/modal/Jenis";
-import { MakeLap, MakeSpd, tgllIndo, updateSPD } from "@/lib/fungsiLain";
+import { MakeLap, MakeSpd, tgllIndo} from "@/lib/fungsiLain";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -107,11 +107,14 @@ function CetakSppd({ item, urlLoad, setUrlLoad, mutate }) {
           <label
             disabled={urlLoad}
             className="btn btn-xs btn-error my-1"
-            onClick={() => {
+            onClick={async () => {
               setUrlLoad(true);
-              MakeSpd(item.id);
-              mutate();
-              updateSPD()
+              await MakeSpd(item.id).then(()=>{
+                mutate(process.env.URL_SPD);
+              })
+              setTimeout(() => {
+                setUrlLoad(false);
+              }, 10000);
             }}
           >
             SPD
@@ -121,11 +124,17 @@ function CetakSppd({ item, urlLoad, setUrlLoad, mutate }) {
           <label
             disabled={urlLoad}
             className="btn btn-xs btn-warning"
-            onClick={() => {
+            onClick={async () => {
               setUrlLoad(true);
-              MakeLap(item.id);
-              mutate();
-              updateSPD()
+              await MakeLap(item.id)
+                .then(() => {
+                  mutate(process.env.URL_SPD);
+                })
+                .then(() => {
+                  setTimeout(() => {
+                    setUrlLoad(false);
+                  }, 10000);
+                });
             }}
           >
             Laporan

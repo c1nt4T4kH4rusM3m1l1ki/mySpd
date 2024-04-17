@@ -13,7 +13,7 @@ export default function PageSpd() {
   const refreshData = async () => {
     const response = await fetch(process.env.URL_SPD);
     const data = await response.json();
-    mutate(process.env.URL_SPD, data, false);
+    mutate(process.env.URL_SPD);
     // update data lokal dan tidak memicu pengambilan ulang data
   };
 

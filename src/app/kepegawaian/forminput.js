@@ -42,9 +42,13 @@ const FormInput = (props) => {
   const { setProses, mutate } = props;
 
   async function Tambah() {
-    setProses(true);
-    await TambahPeg(dataPeg)
-    .then(location.href="/kepegawaian");
+    try {
+      setProses(true);
+      await TambahPeg(dataPeg);
+      mutate(process.env.URL_PEG);
+    } catch (error) {
+      console.error("Terjadi kesalahan saat menambah pegawai:", error);
+    }
   }
 
   return (

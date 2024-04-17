@@ -124,9 +124,3 @@ export async function IsLogin(){
   const data = await res.json()
   return data
 }
-
-export function updateSPD(){
-  setTimeout(()=>{
-    location.href="/spd"
-  },10000)
-}

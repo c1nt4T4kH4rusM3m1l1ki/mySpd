@@ -63,7 +63,7 @@ const EditKepegawaian = (props) => {
     setProses(true);
     setEdit(true)
     await TambahPeg(dataPeg)
-    .then(location.href="/kepegawaian")
+    .then(mutate(process.env.URL_PEG))
   };
 
   return (

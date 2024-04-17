@@ -9,7 +9,7 @@ import { useEffect,  useState } from "react";
 const Kepegawaian = () => {
   const [proses, setProses] = useState(false);
   const fecher = (url) => fetch(url).then((res) => res.json());
-  const {data, error}=useSWR(process.env.URL_PEG, fecher,{
+  const {data}=useSWR(process.env.URL_PEG, fecher,{
     revalidateOnMount:true,
     revalidateOnFocus:true,
     revalidateOnReconnect:true
@@ -31,18 +31,10 @@ const Kepegawaian = () => {
   useEffect(() => {
     if (data) {
       callDataPeg(data);
+      setProses(false);
+    } else {
+      setProses(true);
     }
-    
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
-    if (data) {
-      callDataPeg(data);
-    }
-    setProses(false)
-    
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
  
 
