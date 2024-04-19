@@ -172,9 +172,7 @@ function ActionSpt(props) {
       console.error("Terjadi kesalahan:", error);
       // Tangani kesalahan sesuai kebutuhan Anda
       alert("Gagal menambah SPT :"+error);
-    } finally {
-      setLoad(false);
-    }
+    } 
   };
 
   return (

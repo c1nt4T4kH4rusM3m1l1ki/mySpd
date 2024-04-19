@@ -38,7 +38,7 @@ export default function PageSpd() {
   return (
     <Fragment>
       <div className="ml-10 mt-8">
-        <InputSpt setLoad={setLoad} mutate={refreshData} />
+        <InputSpt setLoad={setLoad} mutate={mutate} />
       </div>
       {dataSPD && !load ? (
         <TabelSpd data={dataSPD} mutate={refreshData} />
@@ -51,10 +51,15 @@ export default function PageSpd() {
 
 const NullData = () => {
   return (
-    <div className="text-center mt-10">
-      <span className="loading loading-spinner text-secondary"></span>
-      <span className="loading loading-spinner text-secondary"></span>
-      <span className="loading loading-spinner text-secondary"></span>
+    <div>
+      <div className="text-center mt-10 text-emerald-700">Proses Data</div>
+      <div className="text-center text-emerald-700">
+        <span className="loading loading-dots loading-md"></span>
+        <span className="loading loading-dots loading-md"></span>
+        <span className="loading loading-dots loading-md"></span>
+        <span className="loading loading-dots loading-md"></span>
+        <span className="loading loading-dots loading-md"></span>
+      </div>
     </div>
   );
 };
