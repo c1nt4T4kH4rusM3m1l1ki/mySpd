@@ -39,10 +39,12 @@ function LoginForm() {
       const res = await signIn("credentials", {
         redirect: false,
         password: valueInput,
-        callbackUrl: "/",
+        callbackUrl: "/spd",
       });
       if (!res?.error) {
-        push("/");
+        setTimeout(() => {
+          push("/spd");
+        }, 2000);
       } else {
         alert("Password Salah");
         location.reload();
