@@ -42,9 +42,7 @@ function LoginForm() {
         callbackUrl: "/spd",
       });
       if (!res?.error) {
-        setTimeout(() => {
-          push("/spd");
-        }, 2000);
+        push("/spd")
       } else {
         alert("Password Salah");
         location.reload();

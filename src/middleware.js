@@ -9,6 +9,8 @@ export async function middleware(req) {
     return NextResponse.redirect(new URL('/spd', req.url));
   }
 
+
+
   // Memeriksa apakah pengguna mencoba mengakses halaman yang membutuhkan autentikasi tanpa token
   if (!pathname.startsWith('/login') && !token && !pathname.startsWith('/api/auth')) {
     return NextResponse.redirect(new URL('/login', req.url));
