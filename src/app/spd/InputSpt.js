@@ -33,7 +33,7 @@ export default function InputSpt(props) {
 
   useEffect(() => {
     refSpd.dasar.current.value =
-      "Nota Dinas dari               Balitbang Kota Sungai Nomor Penuh 500.6.18/     /I/2024/BALITBANG Tanggal      2024 tentang '     '";
+      "Nota Dinas dari               Balitbang Kota Sungai Penuh Nomor 500.6.18/     /I/2024/BALITBANG Tanggal      2024 tentang '     '";
   }, []);
 
   useEffect(() => {}, [spt]);
