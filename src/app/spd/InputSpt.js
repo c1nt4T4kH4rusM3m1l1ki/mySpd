@@ -166,6 +166,7 @@ function ActionSpt(props) {
         },
         body: JSON.stringify(spt),
       });
+      
       // Setelah permintaan berhasil, panggil mutate() untuk memperbarui data
       mutate(process.env.URL_SPD);
     } catch (error) {
