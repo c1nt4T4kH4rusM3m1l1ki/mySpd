@@ -11,7 +11,7 @@ const Table = (props) => {
   // State untuk pagination dan search
   const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState("");
-  const itemsPerPage = 4;
+  const itemsPerPage = 5;
 
   // Filter data based on search term
   const filteredData = datapeg ? datapeg.filter(item =>
