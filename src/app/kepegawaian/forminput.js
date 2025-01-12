@@ -7,7 +7,7 @@ import { BuatId, TambahPeg } from "@/lib/fungsiLain";
 const TambahPegawai = (props) => {
   const { setProses, mutate } = props;
   return (
-    <div className="drawer mt-5">
+    <div >
       <input id="my-drawer" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content">
         <label

@@ -1,6 +1,6 @@
 "use client";
 
-import TambahPegawai from "./forminput";
+
 import Renewdata from "./renewdata";
 import Table from "./table";
 import useSWR, {mutate} from "swr";
@@ -41,7 +41,7 @@ const Kepegawaian = () => {
   return (
     <>
       {proses&&<Renewdata />}
-      <TambahPegawai setProses={setProses}  mutate={mutate}/>
+      
       <Table setProses={setProses} proses={proses} data={data} mutate={mutate} datapeg={datapeg}/>
     </>
   );
