@@ -47,7 +47,7 @@ const Table = (props) => {
             <input
               type="text"
               placeholder="Cari nama..."
-              className="input input-bordered w-64"
+              className="input input-bordered input-sm w-64 max-w-xs"
               value={searchTerm}
               onChange={handleSearch}
             />
