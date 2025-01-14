@@ -2,6 +2,7 @@ import JenisSpt from "@/components/modal/Jenis";
 import { MakeLap, MakeSpd, tgllIndo } from "@/lib/fungsiLain";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import JenisNodin from "@/components/modal/JenisNodin";
 
 const TabelSpd = (props) => {
   const { data, mutate } = props;
@@ -90,12 +91,13 @@ const TabelSpd = (props) => {
             <th rowSpan={2} className="border border-black">
               Print
             </th>
-            <th colSpan={3}>Download</th>
+            <th colSpan={4}>Download</th>
             <th className="border border-black" rowSpan={2}>
               Action
             </th>
           </tr>
           <tr>
+            <th className="border border-black">Nota Dinas</th>
             <th className="border border-black">SPT</th>
             <th className="border border-black">SPD</th>
             <th className="border border-black">Laporan</th>
@@ -182,6 +184,7 @@ function CetakSppd({ item, urlLoad, setUrlLoad, mutate }) {
             urlLoad={urlLoad}
           />
         </li>
+        
         <li>
           <label
             disabled={urlLoad}
@@ -219,6 +222,15 @@ function CetakSppd({ item, urlLoad, setUrlLoad, mutate }) {
             Laporan
           </label>
         </li>
+        <li>
+          <JenisNodin
+            thisId={item.maksud}
+            item={item}
+            setUrlLoad={setUrlLoad}
+            mutate={mutate}
+            urlLoad={urlLoad}
+          />
+        </li>
       </ul>
     </td>
   );
@@ -230,6 +242,15 @@ function UrlLaporan({ item, urlLoad, setUrlLoad }) {
   }, [item]);
   return (
     <>
+    <td className="border border-black text-center">
+        {urlLoad ? (
+          <span className="loading loading-bars loading-xs"></span>
+        ) : item.urlNotaDinas ? (
+          <CloudPrint url={item.urlNotaDinas} />
+        ) : (
+          ""
+        )}
+      </td>
       <td className="border border-black text-center">
         <ol>
           <li>
