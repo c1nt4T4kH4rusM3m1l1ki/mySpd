@@ -39,10 +39,17 @@ const TabelSpd = (props) => {
      item.maksud.toLowerCase().includes(searchTerm.toLowerCase()))
   );
 
-  const total_pages = Math.ceil(filteredData.length / itemsPerPage);
+  // Filter data based on search term
+  const filteredDataSorted = filteredData
+    .sort((a, b) => new Date(b.tanggalBerangkat) - new Date(a.tanggalBerangkat)) // Mengurutkan berdasarkan tanggal terbaru
+    .filter(item =>
+      item.maksud.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
+  const total_pages = Math.ceil(filteredDataSorted.length / itemsPerPage);
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentData = filteredData.slice(indexOfFirstItem, indexOfLastItem);
+  const currentData = filteredDataSorted.slice(indexOfFirstItem, indexOfLastItem);
 
   return (
     <div className="px-10 mt-5 mb-16">
