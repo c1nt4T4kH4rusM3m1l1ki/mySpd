@@ -6,13 +6,14 @@ import TextareaLg from "@/components/elements/Textarea";
 import { objEditSpd, Kendaraan } from "@/lib/data";
 import moment from "moment";
 import Link from "next/link";
-import { redirect, useRouter } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
+import { act, useEffect, useRef, useState } from "react";
 
-export function FormEdit(props) {
-  const { dataSpd, pegawai, setLoad } = props;
+export function FormEdit({ dataSpd, pegawai, onError }) {
   const [edit, setEdit] = useState(true);
   const [dataEdit, setDataEdit] = useState(objEditSpd);
+  const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
 
   // refs
   const refSpd = {
@@ -36,67 +37,146 @@ export function FormEdit(props) {
   };
 
   useEffect(() => {
-    refSpd.dasar.current.value = dataSpd.dasar;
-    refSpd.maksud.current.value = dataSpd.maksud;
-    refSpd.tanggalBerangkat.current.value = moment(
-      dataSpd.tanggalBerangkat
-    ).format("YYYY-MM-DD");
-    refSpd.tanggalKembali.current.value = moment(dataSpd.tanggalKembali).format(
-      "YYYY-MM-DD"
-    );
-    refSpd.jenisKendaraan.current.value = dataSpd.jenisKendaraan;
-    refSpd.tujuanBerangkat.current.value = dataSpd.tujuanBerangkat;
-    refSpd.person.current.value = dataSpd.person;
-    refSpd.pengikut1.current.value = dataSpd.pengikut1;
-    refSpd.pengikut2.current.value = dataSpd.pengikut2;
-    refSpd.pengikut3.current.value = dataSpd.pengikut3;
-    refSpd.pptk.current.value = dataSpd.pptk;
-    refSpd.tanggalSpt.current.value = moment(dataSpd.tanggalSpt).format(
-      "YYYY-MM-DD"
-    );
-    refSpd.tanggalSpd.current.value = moment(dataSpd.tanggalSpd).format(
-      "YYYY-MM-DD"
-    );
-  }, []);
-
-  useEffect(() => {
-    refSpd.dasar.current.value = dataSpd.dasar;
-    refSpd.maksud.current.value = dataSpd.maksud;
-    refSpd.tanggalBerangkat.current.value = moment(
-      dataSpd.tanggalBerangkat
-    ).format("YYYY-MM-DD");
-    refSpd.tanggalKembali.current.value = moment(dataSpd.tanggalKembali).format(
-      "YYYY-MM-DD"
-    );
-    refSpd.jenisKendaraan.current.value = dataSpd.jenisKendaraan;
-    refSpd.tujuanBerangkat.current.value = dataSpd.tujuanBerangkat;
-    refSpd.person.current.value = dataSpd.person;
-    refSpd.pengikut1.current.value = dataSpd.pengikut1;
-    refSpd.pengikut2.current.value = dataSpd.pengikut2;
-    refSpd.pengikut3.current.value = dataSpd.pengikut3;
-    refSpd.pptk.current.value = dataSpd.pptk;
-    refSpd.tanggalSpt.current.value = moment(dataSpd.tanggalSpt).format(
-      "YYYY-MM-DD"
-    );
-    refSpd.tanggalSpd.current.value = moment(dataSpd.tanggalSpd).format(
-      "YYYY-MM-DD"
-    );
+    if (!dataSpd) return;
+    
+    try {
+      // Set nilai awal form
+      Object.keys(refSpd).forEach(key => {
+        if (refSpd[key].current && dataSpd[key]) {
+          if (key.includes('tanggal')) {
+            refSpd[key].current.value = moment(dataSpd[key]).format("YYYY-MM-DD");
+          } else {
+            refSpd[key].current.value = dataSpd[key];
+          }
+        }
+      });
+    } catch (error) {
+      console.error("Error setting initial form values:", error);
+      onError?.();
+    }
   }, [dataSpd]);
 
-  function settingEdit(e, item) {
-    setDataEdit({ ...dataEdit, [item]: e.target.value });
-  }
+  const settingEdit = (e, item) => {
+    setDataEdit(prev => ({ ...prev, [item]: e.target.value }));
+  };
+
+
+  const handleDelete = async () => {
+    if (!window.confirm("Apakah anda yakin ingin menghapus data SPD ini?")) {
+      return;
+    }
+  
+    setIsLoading(true);
+    try {
+      const response = await fetch(process.env.URL_SPD, {
+        method: "POST",
+        mode:"no-cors",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          id: dataSpd.id,
+          action: "delete"
+        })
+      });
+  
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      
+      router.push("/spd");
+    } catch (error) {
+      console.error("Error saat delete:", error);
+      alert("Gagal menghapus data: " + error.message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleSave = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+
+    const formData = {
+      action: "edit",
+      id: dataSpd.id,
+      dasar: refSpd.dasar.current.value,
+      jenisKendaraan: refSpd.jenisKendaraan.current.value,
+      maksud: refSpd.maksud.current.value,
+      pengikut1: refSpd.pengikut1.current.value,
+      pengikut2: refSpd.pengikut2.current.value,
+      pengikut3: refSpd.pengikut3.current.value,
+      person: refSpd.person.current.value,
+      pptk: refSpd.pptk.current.value,
+      tanggalBerangkat: refSpd.tanggalBerangkat.current.value,
+      tanggalKembali: refSpd.tanggalKembali.current.value,
+      tanggalSpd: refSpd.tanggalSpd.current.value,
+      tanggalSpt: refSpd.tanggalSpt.current.value,
+      tujuan1: "",
+      tujuan2: "",
+      tujuan3: "",
+      tujuanBerangkat: refSpd.tujuanBerangkat.current.value,
+    };
+
+    try {
+      const response = await fetch(process.env.URL_SPD, {
+        method: "POST",
+        mode:"no-cors",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData)
+      });
+
+      if (!response.ok) {
+        throw new Error('Gagal menyimpan data');
+      }
+        
+    } catch (error) {
+      console.error("Error saving data:", error);
+      onError?.();
+    } finally {
+      setIsLoading(false);
+      setEdit(true);
+      router.push("/spd");
+    }
+  };
 
   return (
     <div>
-      <ActionButton
-        setEdit={setEdit}
-        edit={edit}
-        spd={dataSpd}
-        refSpd={refSpd}
-        dataEdit={dataEdit}
-        setLoad={setLoad}
-      />
+      <div className="flex justify-end mr-20 mt-1">
+        <Link href="/spd" className="btn btn-warning btn-sm">
+          Kembali Ke List SPD
+        </Link>
+
+        {edit ? (
+          <button
+            type="button"
+            className="btn btn-neutral btn-sm mx-2"
+            onClick={() => setEdit(false)}
+            disabled={isLoading}
+          >
+            Edit Data Ini
+          </button>
+        ) : (
+          <button
+            type="button"
+            className="btn btn-accent btn-sm mx-2"
+            onClick={handleSave}
+            disabled={isLoading}
+          >
+            {isLoading ? 'Menyimpan...' : 'Simpan Perubahan'}
+          </button>
+        )}
+
+        <button
+          type="button"
+          className="btn btn-error btn-sm"
+          onClick={handleDelete}
+          disabled={isLoading}
+        >
+          {isLoading ? 'Menghapus...' : 'Hapus Data Ini'}
+        </button>
+      </div>
+
       <div className="flex justify-between px-10 mx-10 mt-3">
         <TextareaLg
           name="Dasar SPT"
@@ -108,7 +188,7 @@ export function FormEdit(props) {
           name="Maksud"
           ref={refSpd.maksud}
           active={edit}
-          onChange={(e) => setDataEdit(e, "maksud")}
+          onChange={(e) => settingEdit(e, "maksud")}
         />
       </div>
 
@@ -192,127 +272,6 @@ export function FormEdit(props) {
           onChange={(e) => settingEdit(e, "tanggalSpd")}
         />
       </div>
-    </div>
-  );
-}
-
-function ActionButton(props) {
-  const { setEdit, edit, spd, dataEdit, refSpd, setLoad} = props;
-  const [newdata, setNewdata]=useState(dataEdit);
-  const router = useRouter()
-
-  useEffect(()=>{
-    setNewdata({
-      ...newdata,
-      id: spd.id,
-      dasar: refSpd.dasar.current.value,
-      jenisKendaraan: refSpd.jenisKendaraan.current.value,
-      maksud: refSpd.maksud.current.value,
-      pengikut1: refSpd.pengikut1.current.value,
-      pengikut2: refSpd.pengikut2.current.value,
-      pengikut3: refSpd.pengikut3.current.value,
-      person: refSpd.person.current.value,
-      pptk: refSpd.pptk.current.value,
-      tanggalBerangkat: refSpd.tanggalBerangkat.current.value,
-      tanggalKembali: refSpd.tanggalKembali.current.value,
-      tanggalSpd: refSpd.tanggalSpd.current.value,
-      tanggalSpt: refSpd.tanggalSpt.current.value,
-      tujuan1: "",
-      tujuan2: "",
-      tujuan3: "",
-      tujuanBerangkat: refSpd.tujuanBerangkat.current.value,
-    });
-  },[dataEdit])
-
-  function delHandler() {
-    alert("apakah anda yakin ingin menghapus data SPD ini ?")
-    setLoad(true)
-    fetch(process.env.URL_SPD, {
-      method: "POST",
-      mode: "no-cors",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify({
-        action: "delete",
-        id: spd.id,
-      }),
-    });
-
-    location.href="/spd"
-  }
-
-  function editHandler() {
-    setEdit(false);
-    setNewdata({
-      ...newdata,
-      id: spd.id,
-      dasar: refSpd.dasar.current.value,
-      jenisKendaraan: refSpd.jenisKendaraan.current.value,
-      maksud: refSpd.maksud.current.value,
-      pengikut1: refSpd.pengikut1.current.value,
-      pengikut2: refSpd.pengikut2.current.value,
-      pengikut3: refSpd.pengikut3.current.value,
-      person: refSpd.person.current.value,
-      pptk: refSpd.pptk.current.value,
-      tanggalBerangkat: refSpd.tanggalBerangkat.current.value,
-      tanggalKembali: refSpd.tanggalKembali.current.value,
-      tanggalSpd: refSpd.tanggalSpd.current.value,
-      tanggalSpt: refSpd.tanggalSpt.current.value,
-      tujuan1: "",
-      tujuan2: "",
-      tujuan3: "",
-      tujuanBerangkat: refSpd.tujuanBerangkat.current.value,
-    });
-  }
-
-  async function simpanHandler(e) {
-    e.preventDefault()
-    setEdit(true)
-    setLoad(true)
-    await fetch(process.env.URL_SPD,{
-      method:"POST",
-      mode:"no-cors",
-      headers:{
-        'content-type':'application/json'
-      },
-      body: JSON.stringify(newdata)
-    })
-   
-    router.push("/spd");
-  }
-
-  return (
-    <div className="flex justify-end mr-20 mt-1">
-      <Link href={"/spd"} type="button" className="btn btn-warning btn-sm">
-        Kembali Ke List SPD
-      </Link>
-
-      {edit ? (
-        <button
-          type="button"
-          className="btn btn-neutral btn-sm mx-2"
-          onClick={editHandler}
-        >
-          Edit Data Ini
-        </button>
-      ) : (
-        <button
-          type="button"
-          className="btn btn-accent btn-sm mx-2"
-          onClick={e=>simpanHandler(e)}
-        >
-          Simpan Perubahan
-        </button>
-      )}
-
-      <button
-        type="button"
-        className="btn btn-error btn-sm"
-        onClick={delHandler}
-      >
-        Hapus Data Ini
-      </button>
     </div>
   );
 }

@@ -14,7 +14,7 @@ const TambahPegawai = (props) => {
           htmlFor="my-drawer"
           className="btn bg-cyan-500 btn-sm rounded-full ml-20 drawer-button text-lg text-white "
         >
-          <span className="material-symbols-outlined">person_add</span>
+          <span className="material-symbols-outlined align-bottom">person_add</span> Tambah Pegawai
         </label>
       </div>
       <div className="drawer-side z-30">

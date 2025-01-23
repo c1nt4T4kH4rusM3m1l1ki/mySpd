@@ -11,7 +11,7 @@ const Table = (props) => {
   // State untuk pagination dan search
   const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState("");
-  const itemsPerPage = 6;
+  const itemsPerPage = 4;
 
   // Filter data based on search term
   const filteredData = datapeg ? datapeg
@@ -49,7 +49,7 @@ const Table = (props) => {
             <input
               type="text"
               placeholder="Cari nama..."
-              className="input input-bordered w-64 input-sm"
+              className="input input-bordered w-64"
               value={searchTerm}
               onChange={handleSearch}
             />

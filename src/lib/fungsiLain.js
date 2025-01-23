@@ -119,6 +119,20 @@ export const MakeLap= async(id)=>{
   })
 }
 
+export const MakeNodin= async(id, jenis)=>{
+  await fetch(process.env.MK_NODIN,{
+    method:'POST',
+    mode:'no-cors',
+    headers:{
+      'content-type':'application/json'
+    },
+    body:JSON.stringify({
+      id,
+      jenis
+    })
+  })
+}
+
 export async function IsLogin(){
   const res = await fetch('http://localhost:3000/api/auth/session')
   const data = await res.json()
