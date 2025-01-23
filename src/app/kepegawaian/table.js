@@ -11,12 +11,14 @@ const Table = (props) => {
   // State untuk pagination dan search
   const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState("");
-  const itemsPerPage = 4;
+  const itemsPerPage = 6;
 
   // Filter data based on search term
-  const filteredData = datapeg ? datapeg.filter(item =>
-    item.nama.toLowerCase().includes(searchTerm.toLowerCase())
-  ) : [];
+  const filteredData = datapeg ? datapeg
+    .sort((a, b) => a.nama.localeCompare(b.nama)) // Mengurutkan berdasarkan nama
+    .filter(item =>
+      item.nama.toLowerCase().includes(searchTerm.toLowerCase())
+    ) : [];
 
   // Perhitungan pagination
   const indexOfLastItem = currentPage * itemsPerPage;
@@ -37,7 +39,7 @@ const Table = (props) => {
   };
 
   return (
-    <div className="px-20 mt-5 mb-16">
+    <div className="px-20 mt-7 mb-16">
       {/* Search Input */}
       
       <div className="flex justify-between mb-4 mt-4">
@@ -47,7 +49,7 @@ const Table = (props) => {
             <input
               type="text"
               placeholder="Cari nama..."
-              className="input input-bordered w-64"
+              className="input input-bordered w-64 input-sm"
               value={searchTerm}
               onChange={handleSearch}
             />
