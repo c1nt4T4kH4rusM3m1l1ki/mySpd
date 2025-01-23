@@ -1,6 +1,6 @@
 "use client";
 import { PangkatGol, objPegawai } from "@/lib/data";
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import { ubahGolongan } from "@/lib/fungsiLain";
 import { BuatId, TambahPeg } from "@/lib/fungsiLain";
 
@@ -12,7 +12,7 @@ const TambahPegawai = (props) => {
       <div className="drawer-content">
         <label
           htmlFor="my-drawer"
-          className="btn bg-cyan-500 btn-sm rounded-full ml-20 drawer-button text-lg text-white "
+          className="btn bg-cyan-500 btn-sm rounded-full ml-20 drawer-button text-sm text-white "
         >
           <span className="material-symbols-outlined align-bottom">person_add</span> Tambah Pegawai
         </label>
@@ -24,7 +24,7 @@ const TambahPegawai = (props) => {
           className="drawer-overlay"
         ></label>
         <div className="menu p-4 w-[500px] min-h-full text-base-content bg-salmon">
-          <h1 className={`text-center font-bold mt-6 text-xl`}>
+          <h1 className={`text-center mt-2 text-lg`}>
             TAMBAH PEGAWAI
           </h1>
           {/* tempatkan isian */}
