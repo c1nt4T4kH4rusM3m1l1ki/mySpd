@@ -49,10 +49,10 @@ export default function InputSpt(props) {
         </>
       }
       modalId="spt"
-      lebar="w-12/12 bg-cyan-200"
+      lebar="w-full bg-cyan-200"
     >
-      <div className="text-sm font-bold">
-        <div className="flex justify-around px-2 mt-2">
+      <div className="text-sm font-bold p-4">
+        <div className="flex flex-col md:flex-row md:justify-around px-2 mt-2 gap-4">
           <TextareaLg
             name="Dasar SPT"
             ref={refSpd.dasar}
@@ -67,7 +67,7 @@ export default function InputSpt(props) {
             }}
           />
         </div>
-        <div className="flex justify-around mt-1 px-2">
+        <div className="flex flex-col md:flex-row md:justify-around mt-1 px-2 gap-4">
           <DateInput
             name="Tanggal Berangkat"
             onChange={(e) => {
@@ -94,7 +94,7 @@ export default function InputSpt(props) {
             }}
           />
         </div>
-        <div className="flex justify-around mt-1 px-2">
+        <div className="flex flex-col md:flex-row md:justify-around mt-1 px-2 gap-4">
           <Select
             name="Yang Melaksanakan"
             isi={data}
@@ -125,7 +125,7 @@ export default function InputSpt(props) {
           />
         </div>
 
-        <div className="flex justify-around mt-3">
+        <div className="flex flex-col md:flex-row md:justify-around mt-3 gap-4">
           <Select
             name="PPTK"
             isi={data}
@@ -172,7 +172,7 @@ function ActionSpt(props) {
     } catch (error) {
       console.error("Terjadi kesalahan:", error);
       // Tangani kesalahan sesuai kebutuhan Anda
-      alert("Gagal menambah SPT :"+error);
+      alert("Gagal menambah SPT :" + error);
     } 
   };
 

@@ -6,10 +6,10 @@ export default function Home() {
 
   return (
     <main className="mx-5 my-12 p-5">
-      <div className="grid grid-cols-2 mt-4">
-        <div className="text-xl text-end p-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 mt-4 gap-4">
+        <div className="text-xl text-center md:text-end p-4">
           <div className="chat chat-end p-5">
-            <p className="chat-bubble w-[470px] font-bold rounded-full p-9">
+            <p className="chat-bubble font-bold rounded-full p-9">
               {paragraf}
             </p>
           </div>
@@ -19,10 +19,10 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className="flex justify-start">
+        <div className="flex justify-center md:justify-start">
           <iframe
             src="https://giphy.com/embed/MSIxUdzMcsYbJKvwQ1"
-            className="giphy-embed w-[340px] h-[340px]"
+            className="giphy-embed w-full h-auto md:w-[340px] md:h-[340px]"
             allowFullScreen
           ></iframe>
         </div>

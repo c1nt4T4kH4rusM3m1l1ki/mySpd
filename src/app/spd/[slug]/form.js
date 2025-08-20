@@ -141,8 +141,8 @@ export function FormEdit({ dataSpd, pegawai, onError }) {
   };
 
   return (
-    <div>
-      <div className="flex justify-end mr-20 mt-1">
+    <div className="p-4">
+      <div className="flex flex-col md:flex-row justify-end gap-2 mt-1">
         <Link href="/spd" className="btn btn-warning btn-sm">
           Kembali Ke List SPD
         </Link>
@@ -150,7 +150,7 @@ export function FormEdit({ dataSpd, pegawai, onError }) {
         {edit ? (
           <button
             type="button"
-            className="btn btn-neutral btn-sm mx-2"
+            className="btn btn-neutral btn-sm"
             onClick={() => setEdit(false)}
             disabled={isLoading}
           >
@@ -159,7 +159,7 @@ export function FormEdit({ dataSpd, pegawai, onError }) {
         ) : (
           <button
             type="button"
-            className="btn btn-accent btn-sm mx-2"
+            className="btn btn-accent btn-sm"
             onClick={handleSave}
             disabled={isLoading}
           >
@@ -177,7 +177,7 @@ export function FormEdit({ dataSpd, pegawai, onError }) {
         </button>
       </div>
 
-      <div className="flex justify-between px-10 mx-10 mt-3">
+      <div className="flex flex-col md:flex-row justify-between gap-4 mt-3">
         <TextareaLg
           name="Dasar SPT"
           ref={refSpd.dasar}
@@ -192,7 +192,7 @@ export function FormEdit({ dataSpd, pegawai, onError }) {
         />
       </div>
 
-      <div className="flex justify-between mx-10 mt-1 px-10">
+      <div className="flex flex-col md:flex-row justify-between gap-4 mt-1">
         <DateInput
           name="Tanggal Berangkat"
           ref={refSpd.tanggalBerangkat}
@@ -220,7 +220,7 @@ export function FormEdit({ dataSpd, pegawai, onError }) {
         />
       </div>
 
-      <div className="flex justify-between mx-10 mt-1 px-10">
+      <div className="flex flex-col md:flex-row justify-between gap-4 mt-1">
         <Select
           name="Yang Melaksanakan"
           ref={refSpd.person}
@@ -251,7 +251,7 @@ export function FormEdit({ dataSpd, pegawai, onError }) {
         />
       </div>
 
-      <div className="flex justify-between mx-10 mt-1 mb-10 px-10">
+      <div className="flex flex-col md:flex-row justify-between gap-4 mt-1 mb-10">
         <Select
           name="PPTK"
           ref={refSpd.pptk}

@@ -39,17 +39,17 @@ const Table = (props) => {
   };
 
   return (
-    <div className="px-20 mt-7 mb-16">
+    <div className="px-4 md:px-8 lg:px-16 mt-7 mb-16">
       {/* Search Input */}
       
-      <div className="flex justify-between mb-4 mt-4">
+      <div className="flex flex-col md:flex-row justify-between mb-4 mt-4 gap-4">
       
         <div className="form-control">
           <div className="input-group">
             <input
               type="text"
               placeholder="Cari nama..."
-              className="input input-bordered w-64 input-sm"
+              className="input input-bordered w-full md:w-64 input-sm"
               value={searchTerm}
               onChange={handleSearch}
             />
@@ -58,26 +58,26 @@ const Table = (props) => {
         <TambahPegawai setProses={setProses}  mutate={mutate}/>
       </div>
 
-      <div>
+      <div className="overflow-x-auto">
         <table className="table table-sm">
           <thead className="bg-gray-50 border text-base font-bold sticky top-0 z-20">
             <tr>
-              <th className="hidden w-20">Id</th>
-              <th className="w-44">Nama</th>
+              <th className="hidden">Id</th>
+              <th>Nama</th>
               <th>Nip</th>
-              <th className="w-40">Pangkat</th>
-              <th className="w-20">Gol</th>
+              <th>Pangkat</th>
+              <th>Gol</th>
               <th>Jabatan</th>
-              <th className="w-36">Tanggal Lahir</th>
+              <th>Tanggal Lahir</th>
               <th>Tingkat SPD</th>
-              <th className="w-[10px]"></th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
             {currentItems.length > 0 ? (
               currentItems.map((item) => (
                 <tr key={item.id}>
-                  <td className="hidden w-20">{item.id}</td>
+                  <td className="hidden">{item.id}</td>
                   <td>
                     <EditKepegawaian nama={item.nama} id={item.id} data={item} setProses={setProses} mutate={mutate}/>
                   </td>
@@ -87,7 +87,7 @@ const Table = (props) => {
                   <td>
                     <EditKepegawaian nama={item.pangkat} id={item.id} data={item} setProses={setProses} mutate={mutate}/>
                   </td>
-                  <td className="w-20">
+                  <td>
                     <EditKepegawaian nama={item.golongan} id={item.id} data={item} setProses={setProses} mutate={mutate}/>
                   </td>
                   <td>
@@ -203,7 +203,7 @@ function Hapus(props) {
 
       <input type="checkbox" id={nama} className="modal-toggle" />
       <div className="modal" role="dialog">
-        <div className="modal-box w-[400px] bg-cyan-200">
+        <div className="modal-box w-auto md:w-[400px] bg-cyan-200">
           <h3 className="text-lg font-bold text-red-700 text-center underline">PERHATIAN !</h3>
           <p className="py-4 text-center text-lg mt-4">Apakah Anda Yakin Menghapus Data</p>
           <p className="text-center text-xl text-red-800 m-0 font-bold"> An. {nama}</p>

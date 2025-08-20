@@ -52,8 +52,8 @@ const TabelSpd = (props) => {
   const currentData = filteredDataSorted.slice(indexOfFirstItem, indexOfLastItem);
 
   return (
-    <div className="px-10 mt-5 mb-16">
-      <div className="flex justify-end space-x-3 mb-3">
+    <div className="px-4 md:px-8 mt-5 mb-16">
+      <div className="flex flex-col md:flex-row justify-end md:space-x-3 mb-3 gap-3">
 
       <span className="material-symbols-outlined text-black align-buttom ">
                   filter_list
@@ -61,7 +61,7 @@ const TabelSpd = (props) => {
 
         {/* Existing select for 'selectedPeg' */}
         <select
-          className="select select-bordered select-sm w-60 max-w-xs"
+          className="select select-bordered select-sm w-full md:w-60 max-w-xs"
           value={selectedPeg}
           onChange={e => setSelectedPeg(e.target.value)}
         >
@@ -83,35 +83,37 @@ const TabelSpd = (props) => {
         />
         
       </div>
-      <table className="table table-sm border border-black w-full">
-        <thead className="bg-slate-200 text-center border border-black text-sm text-black font-bold sticky top-0 z-20">
-          <tr>
-            <th rowSpan={2} className="border border-black w-[200px]">
-              Personil
-            </th>
-            <th rowSpan={2} className="border border-black w-[160px]">
-              Tanggal SPD
-            </th>
-            <th rowSpan={2} className="border border-black">
-              Maksud
-            </th>
-            <th rowSpan={2} className="border border-black">
-              Print
-            </th>
-            <th colSpan={4}>Download</th>
-            <th className="border border-black" rowSpan={2}>
-              Action
-            </th>
-          </tr>
-          <tr>
-            <th className="border border-black">Nota Dinas</th>
-            <th className="border border-black">SPT</th>
-            <th className="border border-black">SPD</th>
-            <th className="border border-black">Laporan</th>
-          </tr>
-        </thead>
-        <BodyTable data={currentData} mutate={mutate} />
-      </table>
+      <div className="overflow-x-auto">
+        <table className="table table-sm border border-black w-full">
+          <thead className="bg-slate-200 text-center border border-black text-sm text-black font-bold sticky top-0 z-20">
+            <tr>
+              <th rowSpan={2} className="border border-black">
+                Personil
+              </th>
+              <th rowSpan={2} className="border border-black">
+                Tanggal SPD
+              </th>
+              <th rowSpan={2} className="border border-black">
+                Maksud
+              </th>
+              <th rowSpan={2} className="border border-black">
+                Print
+              </th>
+              <th colSpan={4}>Download</th>
+              <th className="border border-black" rowSpan={2}>
+                Action
+              </th>
+            </tr>
+            <tr>
+              <th className="border border-black">Nota Dinas</th>
+              <th className="border border-black">SPT</th>
+              <th className="border border-black">SPD</th>
+              <th className="border border-black">Laporan</th>
+            </tr>
+          </thead>
+          <BodyTable data={currentData} mutate={mutate} />
+        </table>
+      </div>
       <div className="flex justify-between items-center mt-4">
         <button
           className={`btn ${currentPage === 1 ? 'btn-disabled' : ''}`}
